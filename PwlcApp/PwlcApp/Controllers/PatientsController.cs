@@ -126,16 +126,21 @@ namespace PwlcApp.Controllers
 
         public ActionResult Search(string option, string search)
         {
-
+            
             //if a user choose the radio button option as Subject  
             if (option == "Chart")
             {
                 var searchResult = db.Patients.Where(s => s.Chart == search || search == null);
                 return View(searchResult.ToList());
             }
-            else
+            else if (option == "Last Name")
             {
                 var searchResult = db.Patients.Where(s => s.LastName.StartsWith(search) || search == null);
+                return View(searchResult.ToList());
+            }
+            else
+            {
+                var searchResult = db.Patients.Where(s => s.LastName == "supercalifragilisticexpialidoscous");
                 return View(searchResult.ToList());
             }
         }

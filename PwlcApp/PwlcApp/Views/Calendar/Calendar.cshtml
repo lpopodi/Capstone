@@ -3,9 +3,46 @@
     ViewBag.Title = "Calendar";
 }
 
-<h2>Calendar</h2>
+@section scripts{
 
-<div id="fullCalModal" class="modal fade">
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#calendar').fullCalendar({
+                theme: true,
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+
+                defaultView: 'agendaDay',
+                editable: true,
+                allDaySlot: false,
+                selectable: true,
+                slotMinutes: 15,
+                events: "/home/getevents/"
+            });
+        });
+    </script>
+
+}
+
+
+<div class="jumbotron">
+    <h1>Full Calendar Demo</h1>
+</div>
+
+<div class="row">
+
+    <div class="col-md-12">
+        <div id="calendar"></div>
+    </div>
+
+</div>
+
+@*<h2>Calendar</h2>*@
+
+@*<div id="fullCalModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -23,13 +60,13 @@
 
 <script>
     $(document).ready(function () {
-        //var date = new Date();
-        //var d = date.getDate();
-        //var m = date.getMonth();
-        //var y = date.getFullYear();
+        var date = new Date();
+        var d = date.getDate();
+        var m = date.getMonth();
+        var y = date.getFullYear();
 
         $('#calendar').fullCalendar({
-            @*editable: true,
+            editable: true,
             year: y,
             month: m,
             date: d,
@@ -51,7 +88,7 @@
                 $('#modalStart').html(event.start.toString("MM/dd/yyyy hh:mm tt"));
                 $('#modalEnd').html(event.end.toString("MM/dd/yyyy hh:mm tt"));
                 $('#fullCalModal').modal();
-            }*@
+            }
         });
     });
-</script>
+</script>*@
