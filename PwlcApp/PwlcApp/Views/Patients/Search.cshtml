@@ -1,0 +1,110 @@
+﻿
+@model IEnumerable<PwlcApp.Models.Patient>
+
+@{
+    ViewBag.Title = "Search";
+}
+
+@* Html.BeginForm is used to add a form in an Html document *@
+@* Pass the action name in the first parameter, controller name in the second parameter and specify the form request type as get *@
+<br /><br /><br /><br />
+@*@using (Html.BeginForm("Search", "Patients", FormMethod.Get))
+{
+    //the following are search options
+    <b>Search Option: </b>@Html.RadioButton("option", "Last Name") <text>Last Name</text> @Html.RadioButton("option", "Chart")<text>Chart</text>
+    @Html.TextBox("search") <input type="submit" name="Search" value="Search" />
+}*@
+@using (Html.BeginForm("Search", "Patients", FormMethod.Get))
+{
+    <p>
+        @Html.RadioButton("option", "Last Name") <text>Last Name</text> @Html.RadioButton("option", "Chart")<text>Chart</text>
+        Title: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Chart)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.State)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Zip)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateOfBirth)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContactMethod)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Chart)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.State)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Zip)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfBirth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactMethod)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.PatientId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.PatientId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.PatientId })
+            </td>
+        </tr>
+    }
+
+</table>
+
+
