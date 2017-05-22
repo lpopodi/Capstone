@@ -15,14 +15,6 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.CheckupId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CheckupId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CheckupId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
             @Html.LabelFor(model => model.CheckupDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.CheckupDate, new { htmlAttributes = new { @class = "form-control" } })
@@ -89,10 +81,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.LossGain, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.LossGain)
-                    @Html.ValidationMessageFor(model => model.LossGain, "", new { @class = "text-danger" })
-                </div>
+                @Html.EnumDropDownListFor(model => model.LossGain, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.LossGain, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -131,30 +121,24 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Excercising, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Excercising)
-                    @Html.ValidationMessageFor(model => model.Excercising, "", new { @class = "text-danger" })
-                </div>
+                @Html.EnumDropDownListFor(model => model.Excercising, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Excercising, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.FollowingFoodGuidelines, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.FollowingFoodGuidelines)
-                    @Html.ValidationMessageFor(model => model.FollowingFoodGuidelines, "", new { @class = "text-danger" })
-                </div>
+                @Html.EnumDropDownListFor(model => model.FollowingFoodGuidelines, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.FollowingFoodGuidelines, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.HCG, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.HCG)
-                    @Html.ValidationMessageFor(model => model.HCG, "", new { @class = "text-danger" })
-                </div>
+                @Html.EnumDropDownListFor(model => model.HCG, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.HCG, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -193,10 +177,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ScriptToFill, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.ScriptToFill)
-                    @Html.ValidationMessageFor(model => model.ScriptToFill, "", new { @class = "text-danger" })
-                </div>
+                @Html.EnumDropDownListFor(model => model.ScriptToFill, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ScriptToFill, "", new { @class = "text-danger" })
             </div>
         </div>
 

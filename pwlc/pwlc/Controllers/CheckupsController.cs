@@ -21,7 +21,7 @@ namespace pwlc.Controllers
         }
 
         // GET: Checkups/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -46,10 +46,12 @@ namespace pwlc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CheckupId,CheckupDate,CheckupType,Age,Height,Weight,BP,BMI,BodyFat,LossGain,Amount,TotalLoss,DailyWaterIntake,Cycle,Excercising,FollowingFoodGuidelines,HCG,Hips,Waist,Chest,Arm,ScriptToFill,StaffNotes,DoctorNotes,Signature,FillScript")] Checkup checkup)
+        public ActionResult Create([Bind(Include = "CheckupId,CheckupDate,CheckupType,Age,Height,Weight,BP,BMI,BodyFat,LossGain,Amount,TotalLoss,DailyWaterIntake,Cycle,Excercising,FollowingFoodGuidelines,HCG,Hips,Waist,Chest,Arm,ScriptToFill,StaffNotes,DoctorNotes,Signature,FillScript")] Checkup checkup, string patientId)
         {
             if (ModelState.IsValid)
             {
+                var patient = db.Patients.Where(i => i.PatientId == patientId).Select(p => p).FirstOrDefault();
+                patient.Checkups.Add(checkup);
                 db.Checkups.Add(checkup);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -59,7 +61,7 @@ namespace pwlc.Controllers
         }
 
         // GET: Checkups/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -90,7 +92,7 @@ namespace pwlc.Controllers
         }
 
         // GET: Checkups/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -107,7 +109,7 @@ namespace pwlc.Controllers
         // POST: Checkups/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(int id)
         {
             Checkup checkup = db.Checkups.Find(id);
             db.Checkups.Remove(checkup);

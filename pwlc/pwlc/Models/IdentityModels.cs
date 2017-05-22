@@ -35,6 +35,7 @@ namespace pwlc.Models
         public DbSet<Checkup> Checkups { get; set; }
         public DbSet<Injection> Injections { get; set; }
         public DbSet<Item> Items { get; set; }
+        public DbSet<Invoice> Invoices { get; set; }
 
     }
 }

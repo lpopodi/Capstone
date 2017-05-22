@@ -123,40 +123,5 @@ namespace pwlc.Controllers
             }
             base.Dispose(disposing);
         }
-
-        public ActionResult Search(string option, string search)
-        {
-
-            //if a user choose the radio button option as Subject  
-            if (option == "Chart")
-            {
-                var searchResult = db.Patients.Where(s => s.Chart == search || search == null);
-                return View(searchResult.ToList());
-            }
-            else if (option == "Last Name")
-            {
-                var searchResult = db.Patients.Where(s => s.LastName.StartsWith(search) || search == null);
-                return View(searchResult.ToList());
-            }
-            else
-            {
-                var searchResult = db.Patients.Where(s => s.LastName == "supercalifragilisticexpialidoscous");
-                return View(searchResult.ToList());
-            }
-        }
-
-        public ActionResult Account(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Patient patient = db.Patients.Find(id);
-            if (patient == null)
-            {
-                return HttpNotFound();
-            }
-            return View(patient);
-        }
     }
 }

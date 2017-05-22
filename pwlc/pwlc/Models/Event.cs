@@ -29,7 +29,8 @@ namespace pwlc.Models
         public string textColor { get; set; }
         [DataMember]
         public EventType? EventType { get; set; }
-        //public virtual Patient Id { get; set; }
+
+        public virtual Patient Patient { get; set; }
 
         public Event()
         {

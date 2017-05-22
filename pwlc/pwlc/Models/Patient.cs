@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -16,6 +17,7 @@ namespace pwlc.Models
         }
 
         [Key]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string PatientId { get; set; }
         public string Chart { get; set; }
         public string FirstName { get; set; }
@@ -33,7 +35,7 @@ namespace pwlc.Models
         public virtual ICollection<Event> Events { get; set; }
         public virtual ICollection<Checkup> Checkups { get; set; }
         public virtual ICollection<Injection> Injections { get; set; }
-        //public virtual ICollection<Invoice> Invoice { get; set; }
+        public virtual ICollection<Invoice> Invoice { get; set; }
     }
 
     public enum ContactMethod

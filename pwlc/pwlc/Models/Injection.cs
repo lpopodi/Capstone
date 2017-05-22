@@ -14,6 +14,8 @@ namespace pwlc.Models
         public string LotNumber { get; set; }
         public DateTime ExpDate { get; set; }
         public InjectionLocation? InjectionLocation { get; set; }
+
+        public virtual Patient Patient { get; set; }
     }
 
     public enum InjectionLocation
