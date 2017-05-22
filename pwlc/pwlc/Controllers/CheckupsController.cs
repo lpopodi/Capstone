@@ -36,9 +36,21 @@ namespace pwlc.Controllers
         }
 
         // GET: Checkups/Create
-        public ActionResult Create()
+        public ActionResult Create(string pid)
         {
-            return View();
+            if (pid == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Patient patient = db.Patients.Find(pid);
+            Checkup checkup = new Checkup();
+            checkup.Patient = patient;
+            if (patient == null)
+            {
+                return HttpNotFound();
+            }
+            return View(checkup);
         }
 
         // POST: Checkups/Create
@@ -46,12 +58,11 @@ namespace pwlc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CheckupId,CheckupDate,CheckupType,Age,Height,Weight,BP,BMI,BodyFat,LossGain,Amount,TotalLoss,DailyWaterIntake,Cycle,Excercising,FollowingFoodGuidelines,HCG,Hips,Waist,Chest,Arm,ScriptToFill,StaffNotes,DoctorNotes,Signature,FillScript")] Checkup checkup, string patientId)
+        public ActionResult Create(Checkup checkup)
         {
             if (ModelState.IsValid)
             {
-                var patient = db.Patients.Where(i => i.PatientId == patientId).Select(p => p).FirstOrDefault();
-                patient.Checkups.Add(checkup);
+                checkup.Patient = db.Patients.Find(checkup.Patient.PatientId);
                 db.Checkups.Add(checkup);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -80,7 +91,7 @@ namespace pwlc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CheckupId,CheckupDate,CheckupType,Age,Height,Weight,BP,BMI,BodyFat,LossGain,Amount,TotalLoss,DailyWaterIntake,Cycle,Excercising,FollowingFoodGuidelines,HCG,Hips,Waist,Chest,Arm,ScriptToFill,StaffNotes,DoctorNotes,Signature,FillScript")] Checkup checkup)
+        public ActionResult Edit([Bind(Include = "CheckupId,CheckupDate,Age,Height,Weight,BP,BMI,BodyFat,LossGain,Amount,TotalLoss,DailyWaterIntake,Cycle,Excercising,FollowingFoodGuidelines,HCG,Hips,Waist,Chest,Arm,ScriptToFill,FillScript,StaffNotes,DoctorNotes,Signature")] Checkup checkup)
         {
             if (ModelState.IsValid)
             {

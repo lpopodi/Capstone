@@ -7,13 +7,13 @@ namespace pwlc.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class addedenumsforreadability : IMigrationMetadata
+    public sealed partial class newmigrationafterremovingdatabaseandmigrations : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addedenumsforreadability));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(newmigrationafterremovingdatabaseandmigrations));
         
         string IMigrationMetadata.Id
         {
-            get { return "201705221726539_added enums for readability"; }
+            get { return "201705222100081_new migration after removing database and migrations"; }
         }
         
         string IMigrationMetadata.Source

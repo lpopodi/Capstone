@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
+using System.Web.Mvc;
 
 namespace pwlc.Models
 {
@@ -12,6 +13,7 @@ namespace pwlc.Models
     {
         [Key]
         [DataMember]
+        [HiddenInput(DisplayValue = false)]
         public string eventId { get; set; }
         [DataMember]
         public string title { get; set; }
@@ -27,8 +29,6 @@ namespace pwlc.Models
         public string borderColor { get; set; }
         [DataMember]
         public string textColor { get; set; }
-        [DataMember]
-        public EventType? EventType { get; set; }
 
         public virtual Patient Patient { get; set; }
 
@@ -47,14 +47,6 @@ namespace pwlc.Models
             textColor = tcol;
         }
 
-    }
-
-    public enum EventType
-    {
-        New,
-        Checkup,
-        Restart,
-        Office
     }
 
 }

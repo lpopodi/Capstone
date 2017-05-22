@@ -4,16 +4,17 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace pwlc.Models
 {
     public class Checkup
     {
         [Key]
+        [HiddenInput(DisplayValue = false)]
         public int CheckupId { get; set; }
         [DataType(DataType.Date)]
         public DateTime CheckupDate { get; set; }
-        public CheckupType? CheckupType { get; set; }
         public int? Age { get; set; }
         public string Height { get; set; }
         public string Weight { get; set; }
@@ -33,28 +34,19 @@ namespace pwlc.Models
         public double? Chest { get; set; }
         public double? Arm { get; set; }
         public ScriptToFill? ScriptToFill { get; set; }
+        public FillScript? FillScript { get; set; }
         public string StaffNotes { get; set; }
         public string DoctorNotes { get; set; }
         public byte? Signature { get; set; }
 
-        public FillScript? FillScript { get; set; }
-
         public virtual Patient Patient { get; set; }
 
-        public virtual Invoice Invoice { get; set; }
     }
 
     public enum FillScript
     {
         Practitioner,
         Pharmacy
-    }
-
-    public enum CheckupType
-    {
-        New,
-        Checkup,
-        Restart
     }
 
     public enum Excercising
@@ -86,5 +78,13 @@ namespace pwlc.Models
         Loss,
         Gain,
         None
+    }
+
+    public enum VisitType
+    {
+        New,
+        Checkup,
+        Restart,
+        Other
     }
 }

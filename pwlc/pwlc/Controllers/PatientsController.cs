@@ -50,6 +50,7 @@ namespace pwlc.Controllers
         {
             if (ModelState.IsValid)
             {
+                patient.PatientId = Guid.NewGuid().ToString();
                 db.Patients.Add(patient);
                 db.SaveChanges();
                 return RedirectToAction("Index");

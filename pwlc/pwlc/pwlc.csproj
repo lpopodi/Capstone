@@ -201,56 +201,21 @@
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CheckupsController.cs" />
+    <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InjectionsController.cs" />
-    <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PatientsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201705192049430_initial migration for new pwlc project.cs" />
-    <Compile Include="Migrations\201705192049430_initial migration for new pwlc project.Designer.cs">
-      <DependentUpon>201705192049430_initial migration for new pwlc project.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705221236181_adding events model.cs" />
-    <Compile Include="Migrations\201705221236181_adding events model.Designer.cs">
-      <DependentUpon>201705221236181_adding events model.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705221244312_added to identity models.cs" />
-    <Compile Include="Migrations\201705221244312_added to identity models.Designer.cs">
-      <DependentUpon>201705221244312_added to identity models.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705221302310_added models for checkup injection item and patient.cs" />
-    <Compile Include="Migrations\201705221302310_added models for checkup injection item and patient.Designer.cs">
-      <DependentUpon>201705221302310_added models for checkup injection item and patient.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705221336568_added controllers for existing models.cs" />
-    <Compile Include="Migrations\201705221336568_added controllers for existing models.Designer.cs">
-      <DependentUpon>201705221336568_added controllers for existing models.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705221428059_removed some controllers and views to make edits to models.cs" />
-    <Compile Include="Migrations\201705221428059_removed some controllers and views to make edits to models.Designer.cs">
-      <DependentUpon>201705221428059_removed some controllers and views to make edits to models.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705221504355_working on auto generated id for patients.cs" />
-    <Compile Include="Migrations\201705221504355_working on auto generated id for patients.Designer.cs">
-      <DependentUpon>201705221504355_working on auto generated id for patients.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705221530324_edited string key to int key for checkup and invoice.cs" />
-    <Compile Include="Migrations\201705221530324_edited string key to int key for checkup and invoice.Designer.cs">
-      <DependentUpon>201705221530324_edited string key to int key for checkup and invoice.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705221714323_edited checkup to include option for nullables.cs" />
-    <Compile Include="Migrations\201705221714323_edited checkup to include option for nullables.Designer.cs">
-      <DependentUpon>201705221714323_edited checkup to include option for nullables.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705221726539_added enums for readability.cs" />
-    <Compile Include="Migrations\201705221726539_added enums for readability.Designer.cs">
-      <DependentUpon>201705221726539_added enums for readability.cs</DependentUpon>
+    <Compile Include="Migrations\201705222100081_new migration after removing database and migrations.cs" />
+    <Compile Include="Migrations\201705222100081_new migration after removing database and migrations.Designer.cs">
+      <DependentUpon>201705222100081_new migration after removing database and migrations.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AppointmentType.cs" />
     <Compile Include="Models\Checkup.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -464,26 +429,26 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Calendar.cshtml" />
-    <Content Include="Views\Items\Create.cshtml" />
-    <Content Include="Views\Items\Delete.cshtml" />
-    <Content Include="Views\Items\Details.cshtml" />
-    <Content Include="Views\Items\Edit.cshtml" />
-    <Content Include="Views\Items\Index.cshtml" />
     <Content Include="Views\Patients\Create.cshtml" />
     <Content Include="Views\Patients\Delete.cshtml" />
     <Content Include="Views\Patients\Details.cshtml" />
     <Content Include="Views\Patients\Edit.cshtml" />
     <Content Include="Views\Patients\Index.cshtml" />
-    <Content Include="Views\Injections\Create.cshtml" />
-    <Content Include="Views\Injections\Delete.cshtml" />
-    <Content Include="Views\Injections\Details.cshtml" />
-    <Content Include="Views\Injections\Edit.cshtml" />
-    <Content Include="Views\Injections\Index.cshtml" />
     <Content Include="Views\Checkups\Create.cshtml" />
     <Content Include="Views\Checkups\Delete.cshtml" />
     <Content Include="Views\Checkups\Details.cshtml" />
     <Content Include="Views\Checkups\Edit.cshtml" />
     <Content Include="Views\Checkups\Index.cshtml" />
+    <Content Include="Views\Injections\Create.cshtml" />
+    <Content Include="Views\Injections\Delete.cshtml" />
+    <Content Include="Views\Injections\Details.cshtml" />
+    <Content Include="Views\Injections\Edit.cshtml" />
+    <Content Include="Views\Injections\Index.cshtml" />
+    <Content Include="Views\Events\Create.cshtml" />
+    <Content Include="Views\Events\Delete.cshtml" />
+    <Content Include="Views\Events\Details.cshtml" />
+    <Content Include="Views\Events\Edit.cshtml" />
+    <Content Include="Views\Events\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -496,35 +461,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705192049430_initial migration for new pwlc project.resx">
-      <DependentUpon>201705192049430_initial migration for new pwlc project.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705221236181_adding events model.resx">
-      <DependentUpon>201705221236181_adding events model.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705221244312_added to identity models.resx">
-      <DependentUpon>201705221244312_added to identity models.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705221302310_added models for checkup injection item and patient.resx">
-      <DependentUpon>201705221302310_added models for checkup injection item and patient.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705221336568_added controllers for existing models.resx">
-      <DependentUpon>201705221336568_added controllers for existing models.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705221428059_removed some controllers and views to make edits to models.resx">
-      <DependentUpon>201705221428059_removed some controllers and views to make edits to models.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705221504355_working on auto generated id for patients.resx">
-      <DependentUpon>201705221504355_working on auto generated id for patients.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705221530324_edited string key to int key for checkup and invoice.resx">
-      <DependentUpon>201705221530324_edited string key to int key for checkup and invoice.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705221714323_edited checkup to include option for nullables.resx">
-      <DependentUpon>201705221714323_edited checkup to include option for nullables.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705221726539_added enums for readability.resx">
-      <DependentUpon>201705221726539_added enums for readability.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201705222100081_new migration after removing database and migrations.resx">
+      <DependentUpon>201705222100081_new migration after removing database and migrations.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

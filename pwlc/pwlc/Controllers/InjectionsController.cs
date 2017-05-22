@@ -21,7 +21,7 @@ namespace pwlc.Controllers
         }
 
         // GET: Injections/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -36,9 +36,21 @@ namespace pwlc.Controllers
         }
 
         // GET: Injections/Create
-        public ActionResult Create()
+        public ActionResult Create(string pid)
         {
-            return View();
+            if (pid == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Patient patient = db.Patients.Find(pid);
+            Injection injection = new Injection();
+            injection.Patient = patient;
+            if (patient == null)
+            {
+                return HttpNotFound();
+            }
+            return View(injection);
         }
 
         // POST: Injections/Create
@@ -46,10 +58,11 @@ namespace pwlc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "InjectionId,InjectionDate,LotNumber,ExpDate,InjectionLocation")] Injection injection)
+        public ActionResult Create(Injection injection)
         {
             if (ModelState.IsValid)
             {
+                injection.Patient = db.Patients.Find(injection.Patient.PatientId);
                 db.Injections.Add(injection);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -59,7 +72,7 @@ namespace pwlc.Controllers
         }
 
         // GET: Injections/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -90,7 +103,7 @@ namespace pwlc.Controllers
         }
 
         // GET: Injections/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -107,7 +120,7 @@ namespace pwlc.Controllers
         // POST: Injections/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(int id)
         {
             Injection injection = db.Injections.Find(id);
             db.Injections.Remove(injection);

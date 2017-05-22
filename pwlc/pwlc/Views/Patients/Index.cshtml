@@ -85,12 +85,10 @@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.PatientId }) |
             @Html.ActionLink("Details", "Details", new { id=item.PatientId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PatientId }) |
-            @*@Html.ActionLink("Add Checkup", "Create", "Checkups", new { patientId = item.PatientId }) |*@
-            @using (Html.BeginForm("Create", "Checkups", new { patientID = item.PatientId }, FormMethod.Get))
-            {
-                <button class="btn btn-default" type="submit">Add Checkup</button>
-            }
+            @Html.ActionLink("Delete", "Delete", new { id=item.PatientId }) | 
+            @Html.ActionLink("Add Checkup", "Create", "Checkups", new { pid = item.PatientId }, null) |
+            @Html.ActionLink("Add Injection", "Create", "Injections", new { pid = item.PatientId }, null) |
+            @Html.ActionLink("Add Appointment", "Create", "Events", new { pid = item.PatientId }, null)
         </td>
     </tr>
 }

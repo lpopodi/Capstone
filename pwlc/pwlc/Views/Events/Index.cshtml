@@ -1,0 +1,69 @@
+﻿@model IEnumerable<pwlc.Models.Event>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.start)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.end)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.color)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.borderColor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.textColor)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.start)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.end)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.color)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.borderColor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.textColor)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.eventId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.eventId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.eventId })
+        </td>
+    </tr>
+}
+
+</table>

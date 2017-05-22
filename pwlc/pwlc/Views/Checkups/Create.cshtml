@@ -9,7 +9,7 @@
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    
+    @Html.HiddenFor(model => model.Patient.PatientId)
     <div class="form-horizontal">
         <h4>Checkup</h4>
         <hr />
@@ -19,14 +19,6 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.CheckupDate, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.CheckupDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CheckupType, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.CheckupType, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.CheckupType, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -183,6 +175,14 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.FillScript, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.FillScript, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.FillScript, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
             @Html.LabelFor(model => model.StaffNotes, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.StaffNotes, new { htmlAttributes = new { @class = "form-control" } })
@@ -203,14 +203,6 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Signature, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Signature, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.FillScript, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.FillScript, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.FillScript, "", new { @class = "text-danger" })
             </div>
         </div>
 

@@ -10,107 +10,120 @@ using pwlc.Models;
 
 namespace pwlc.Controllers
 {
-    public class ItemsController : Controller
+    public class EventsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Items
+        // GET: Events
         public ActionResult Index()
         {
-            return View(db.Items.ToList());
+            return View(db.Events.ToList());
         }
 
-        // GET: Items/Details/5
+        // GET: Events/Details/5
         public ActionResult Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Item item = db.Items.Find(id);
-            if (item == null)
+            Event @event = db.Events.Find(id);
+            if (@event == null)
             {
                 return HttpNotFound();
             }
-            return View(item);
+            return View(@event);
         }
 
-        // GET: Items/Create
-        public ActionResult Create()
+        // GET: Events/Create
+        public ActionResult Create(string pid)
         {
-            return View();
+            if (pid == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Patient patient = db.Patients.Find(pid);
+            Event @event = new Event();
+            @event.Patient = patient;
+            if (patient == null)
+            {
+                return HttpNotFound();
+            }
+            return View(@event);
         }
 
-        // POST: Items/Create
+        // POST: Events/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ItemId,ItemName,ItemPrice")] Item item)
+        public ActionResult Create([Bind(Include = "eventId,title,description,start,end,color,borderColor,textColor")] Event @event)
         {
             if (ModelState.IsValid)
             {
-                db.Items.Add(item);
+                @event.Patient = db.Patients.Find(@event.Patient.PatientId);
+                db.Events.Add(@event);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(item);
+            return View(@event);
         }
 
-        // GET: Items/Edit/5
+        // GET: Events/Edit/5
         public ActionResult Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Item item = db.Items.Find(id);
-            if (item == null)
+            Event @event = db.Events.Find(id);
+            if (@event == null)
             {
                 return HttpNotFound();
             }
-            return View(item);
+            return View(@event);
         }
 
-        // POST: Items/Edit/5
+        // POST: Events/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ItemId,ItemName,ItemPrice")] Item item)
+        public ActionResult Edit([Bind(Include = "eventId,title,description,start,end,color,borderColor,textColor")] Event @event)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(item).State = EntityState.Modified;
+                db.Entry(@event).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(item);
+            return View(@event);
         }
 
-        // GET: Items/Delete/5
+        // GET: Events/Delete/5
         public ActionResult Delete(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Item item = db.Items.Find(id);
-            if (item == null)
+            Event @event = db.Events.Find(id);
+            if (@event == null)
             {
                 return HttpNotFound();
             }
-            return View(item);
+            return View(@event);
         }
 
-        // POST: Items/Delete/5
+        // POST: Events/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            Item item = db.Items.Find(id);
-            db.Items.Remove(item);
+            Event @event = db.Events.Find(id);
+            db.Events.Remove(@event);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
