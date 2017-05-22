@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Calendar";
+}
+
+@section scripts{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#calendar').fullCalendar({
+                theme: true,
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+
+                defaultView: 'agendaDay',
+                editable: true,
+                allDaySlot: false,
+                selectable: true,
+                slotMinutes: 15,
+                events: "calendarjson.ashx"
+            });
+        });
+    </script>
+
+}
+
+<div class="row">
+
+    <div class="col-md-6">
+        <div id="calendar"></div>
+    </div>
+    <div class="col-md-6">
+        @Html.ActionLink("Add New Patient", "Create", "Patients") 
+    </div>
+
+</div>
