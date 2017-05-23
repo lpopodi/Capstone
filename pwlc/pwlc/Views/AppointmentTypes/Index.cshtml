@@ -1,0 +1,63 @@
+﻿@model IEnumerable<pwlc.Models.AppointmentType>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ApptType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApptCharge)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApptDuration)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApptColor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApptBorderColor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApptTextColor)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApptType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApptCharge)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApptDuration)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApptColor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApptBorderColor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApptTextColor)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.AppointmentTypeID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.AppointmentTypeID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.AppointmentTypeID })
+        </td>
+    </tr>
+}
+
+</table>

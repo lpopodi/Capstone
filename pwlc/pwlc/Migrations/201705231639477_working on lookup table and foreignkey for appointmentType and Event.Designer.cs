@@ -7,13 +7,13 @@ namespace pwlc.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class newmigrationafterremovingdatabaseandmigrations : IMigrationMetadata
+    public sealed partial class workingonlookuptableandforeignkeyforappointmentTypeandEvent : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(newmigrationafterremovingdatabaseandmigrations));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(workingonlookuptableandforeignkeyforappointmentTypeandEvent));
         
         string IMigrationMetadata.Id
         {
-            get { return "201705222100081_new migration after removing database and migrations"; }
+            get { return "201705231639477_working on lookup table and foreignkey for appointmentType and Event"; }
         }
         
         string IMigrationMetadata.Source

@@ -39,6 +39,9 @@ namespace pwlc.Models
         public string DoctorNotes { get; set; }
         public byte? Signature { get; set; }
 
+        //[ForeignKey("AppointmentType")]
+        //public ApptType AppType { get; set; }
+        //public virtual AppointmentType AppointmentType { get; set; }
         public virtual Patient Patient { get; set; }
 
     }

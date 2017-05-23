@@ -10,108 +10,107 @@ using pwlc.Models;
 
 namespace pwlc.Controllers
 {
-    public class PatientsController : Controller
+    public class PrescriptionsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Patients
+        // GET: Prescriptions
         public ActionResult Index()
         {
-            return View(db.Patients.ToList());
+            return View(db.Prescriptions.ToList());
         }
 
-        // GET: Patients/Details/5
-        public ActionResult Details(string id)
+        // GET: Prescriptions/Details/5
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Patient patient = db.Patients.Find(id);
-            if (patient == null)
+            Prescription prescription = db.Prescriptions.Find(id);
+            if (prescription == null)
             {
                 return HttpNotFound();
             }
-            return View(patient);
+            return View(prescription);
         }
 
-        // GET: Patients/Create
+        // GET: Prescriptions/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Patients/Create
+        // POST: Prescriptions/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PatientId,Chart,FirstName,LastName,Address,City,State,Zip,Phone,Email,DateOfBirth,ContactMethod")] Patient patient)
+        public ActionResult Create([Bind(Include = "ScriptId,ScriptName")] Prescription prescription)
         {
             if (ModelState.IsValid)
             {
-                patient.PatientId = Guid.NewGuid().ToString();
-                db.Patients.Add(patient);
+                db.Prescriptions.Add(prescription);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(patient);
+            return View(prescription);
         }
 
-        // GET: Patients/Edit/5
-        public ActionResult Edit(string id)
+        // GET: Prescriptions/Edit/5
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Patient patient = db.Patients.Find(id);
-            if (patient == null)
+            Prescription prescription = db.Prescriptions.Find(id);
+            if (prescription == null)
             {
                 return HttpNotFound();
             }
-            return View(patient);
+            return View(prescription);
         }
 
-        // POST: Patients/Edit/5
+        // POST: Prescriptions/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PatientId,Chart,FirstName,LastName,Address,City,State,Zip,Phone,Email,DateOfBirth,ContactMethod")] Patient patient)
+        public ActionResult Edit([Bind(Include = "ScriptId,ScriptName")] Prescription prescription)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(patient).State = EntityState.Modified;
+                db.Entry(prescription).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(patient);
+            return View(prescription);
         }
 
-        // GET: Patients/Delete/5
-        public ActionResult Delete(string id)
+        // GET: Prescriptions/Delete/5
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Patient patient = db.Patients.Find(id);
-            if (patient == null)
+            Prescription prescription = db.Prescriptions.Find(id);
+            if (prescription == null)
             {
                 return HttpNotFound();
             }
-            return View(patient);
+            return View(prescription);
         }
 
-        // POST: Patients/Delete/5
+        // POST: Prescriptions/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            Patient patient = db.Patients.Find(id);
-            db.Patients.Remove(patient);
+            Prescription prescription = db.Prescriptions.Find(id);
+            db.Prescriptions.Remove(prescription);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -124,7 +123,5 @@ namespace pwlc.Controllers
             }
             base.Dispose(disposing);
         }
-
-        
     }
 }

@@ -65,6 +65,10 @@ namespace pwlc.Controllers
                 checkup.Patient = db.Patients.Find(checkup.Patient.PatientId);
                 db.Checkups.Add(checkup);
                 db.SaveChanges();
+                //if (checkup.ScriptToFill == "Yes")
+                //{
+                //    return RedirectToAction("GenerateLabel")
+                //}
                 return RedirectToAction("Index");
             }
 

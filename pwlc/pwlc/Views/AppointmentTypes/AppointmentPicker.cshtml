@@ -1,0 +1,6 @@
+﻿@*@inherits System.Web.Mvc.WebViewPage<AppointmentType>
+@Html.DropDownListFor(m => m, new SelectList((IEnumerable<AppointmentType>)ViewBag.AppointmentTypesAll,
+    "Id",
+    "Name",
+    Model == null ? 1 : Model.Id),
+    "Choose--")*@

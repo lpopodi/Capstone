@@ -37,6 +37,6 @@ namespace pwlc.Models
         public DbSet<Item> Items { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<AppointmentType> AppointmentTypes { get; set; }
-
+        public DbSet<Prescription> Prescriptions { get; set; }
     }
 }

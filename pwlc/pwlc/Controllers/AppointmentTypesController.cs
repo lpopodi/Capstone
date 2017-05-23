@@ -10,108 +10,107 @@ using pwlc.Models;
 
 namespace pwlc.Controllers
 {
-    public class PatientsController : Controller
+    public class AppointmentTypesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Patients
+        // GET: AppointmentTypes
         public ActionResult Index()
         {
-            return View(db.Patients.ToList());
+            return View(db.AppointmentTypes.ToList());
         }
 
-        // GET: Patients/Details/5
-        public ActionResult Details(string id)
+        // GET: AppointmentTypes/Details/5
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Patient patient = db.Patients.Find(id);
-            if (patient == null)
+            AppointmentType appointmentType = db.AppointmentTypes.Find(id);
+            if (appointmentType == null)
             {
                 return HttpNotFound();
             }
-            return View(patient);
+            return View(appointmentType);
         }
 
-        // GET: Patients/Create
+        // GET: AppointmentTypes/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Patients/Create
+        // POST: AppointmentTypes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PatientId,Chart,FirstName,LastName,Address,City,State,Zip,Phone,Email,DateOfBirth,ContactMethod")] Patient patient)
+        public ActionResult Create([Bind(Include = "AppointmentTypeID,ApptType,ApptCharge,ApptDuration,ApptColor,ApptBorderColor,ApptTextColor")] AppointmentType appointmentType)
         {
             if (ModelState.IsValid)
             {
-                patient.PatientId = Guid.NewGuid().ToString();
-                db.Patients.Add(patient);
+                db.AppointmentTypes.Add(appointmentType);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(patient);
+            return View(appointmentType);
         }
 
-        // GET: Patients/Edit/5
-        public ActionResult Edit(string id)
+        // GET: AppointmentTypes/Edit/5
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Patient patient = db.Patients.Find(id);
-            if (patient == null)
+            AppointmentType appointmentType = db.AppointmentTypes.Find(id);
+            if (appointmentType == null)
             {
                 return HttpNotFound();
             }
-            return View(patient);
+            return View(appointmentType);
         }
 
-        // POST: Patients/Edit/5
+        // POST: AppointmentTypes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PatientId,Chart,FirstName,LastName,Address,City,State,Zip,Phone,Email,DateOfBirth,ContactMethod")] Patient patient)
+        public ActionResult Edit([Bind(Include = "AppointmentTypeID,ApptType,ApptCharge,ApptDuration,ApptColor,ApptBorderColor,ApptTextColor")] AppointmentType appointmentType)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(patient).State = EntityState.Modified;
+                db.Entry(appointmentType).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(patient);
+            return View(appointmentType);
         }
 
-        // GET: Patients/Delete/5
-        public ActionResult Delete(string id)
+        // GET: AppointmentTypes/Delete/5
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Patient patient = db.Patients.Find(id);
-            if (patient == null)
+            AppointmentType appointmentType = db.AppointmentTypes.Find(id);
+            if (appointmentType == null)
             {
                 return HttpNotFound();
             }
-            return View(patient);
+            return View(appointmentType);
         }
 
-        // POST: Patients/Delete/5
+        // POST: AppointmentTypes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            Patient patient = db.Patients.Find(id);
-            db.Patients.Remove(patient);
+            AppointmentType appointmentType = db.AppointmentTypes.Find(id);
+            db.AppointmentTypes.Remove(appointmentType);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -124,7 +123,5 @@ namespace pwlc.Controllers
             }
             base.Dispose(disposing);
         }
-
-        
     }
 }

@@ -17,7 +17,8 @@ namespace pwlc.Controllers
         // GET: Events
         public ActionResult Index()
         {
-            return View(db.Events.ToList());
+            var events = db.Events.Include(a => a.AppointmentType);
+            return View(events.ToList());
         }
 
         // GET: Events/Details/5
@@ -46,6 +47,8 @@ namespace pwlc.Controllers
             Patient patient = db.Patients.Find(pid);
             Event @event = new Event();
             @event.Patient = patient;
+            @event.title = @event.Patient.FirstName + " " + @event.Patient.LastName;
+            ViewBag.AppointmentTypeId = new SelectList(db.AppointmentTypes, "AppointmentTypeID", "ApptType");
             if (patient == null)
             {
                 return HttpNotFound();
@@ -58,16 +61,44 @@ namespace pwlc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "eventId,title,description,start,end,color,borderColor,textColor")] Event @event)
+        public ActionResult Create(Event @event, DateTime StartDate, DateTime StartTime, AppointmentType AppointmentType)
         {
             if (ModelState.IsValid)
             {
-                @event.Patient = db.Patients.Find(@event.Patient.PatientId);
+                @event.eventId = Guid.NewGuid().ToString();
+                var chosenType = db.AppointmentTypes.Where(t => t.AppointmentTypeID == @event.AppointmentTypeId).First();
+                var switchType = chosenType.ApptType.ToString();
+                switch (switchType)
+                {
+                    case "New":
+                        @event.description = "New Patient Appointment";
+                        break;
+                    case "Checkup":
+                        @event.description = "Weekly Chekup Appointment";
+                        break;
+                    case "Restart":
+                        @event.description = "Patient Restart Appointment";
+                        break;
+                    case "Other":
+                        @event.description = "To Be Determined";
+                        break;
+                    default:
+                        break;
+                }
+                @event.start = StartDate.ToString("yyyy-MM-dd ") + StartTime.ToString("HH:mm:ss");
+                @event.color = chosenType.ApptColor;
+                @event.borderColor = chosenType.ApptBorderColor;
+                @event.textColor = chosenType.ApptTextColor;
+                var minutesToAdd = chosenType.ApptDuration;
+                var EndTime = StartTime + TimeSpan.FromMinutes(minutesToAdd);
+                var EndDate = StartDate;
+                @event.end = EndDate.ToString("yyyy-MM-dd ") + EndTime.ToString("HH:mm:ss");
                 db.Events.Add(@event);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
+            ViewBag.AppointmentTypeId = new SelectList(db.AppointmentTypes, "AppointmentTypeID", "ApptType", @event.AppointmentTypeId);
             return View(@event);
         }
 
@@ -83,6 +114,7 @@ namespace pwlc.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.AppointmentTypeId = new SelectList(db.AppointmentTypes, "AppointmentTypeID", "ApptColor", @event.AppointmentTypeId);
             return View(@event);
         }
 
@@ -91,7 +123,7 @@ namespace pwlc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "eventId,title,description,start,end,color,borderColor,textColor")] Event @event)
+        public ActionResult Edit([Bind(Include = "eventId,title,description,start,end,color,borderColor,textColor,AppointmentTypeId")] Event @event)
         {
             if (ModelState.IsValid)
             {
@@ -99,6 +131,7 @@ namespace pwlc.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.AppointmentTypeId = new SelectList(db.AppointmentTypes, "AppointmentTypeID", "ApptColor", @event.AppointmentTypeId);
             return View(@event);
         }
 

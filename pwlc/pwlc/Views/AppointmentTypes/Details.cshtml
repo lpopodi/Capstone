@@ -1,0 +1,66 @@
+﻿@model pwlc.Models.AppointmentType
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>AppointmentType</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ApptType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApptType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApptCharge)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApptCharge)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApptDuration)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApptDuration)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApptColor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApptColor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApptBorderColor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApptBorderColor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApptTextColor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApptTextColor)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.AppointmentTypeID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

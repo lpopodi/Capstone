@@ -3,7 +3,7 @@ namespace pwlc.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class newmigrationafterremovingdatabaseandmigrations : DbMigration
+    public partial class resetmigrationsanddatabaseagain : DbMigration
     {
         public override void Up()
         {
@@ -15,6 +15,9 @@ namespace pwlc.Migrations
                         ApptType = c.Int(nullable: false),
                         ApptCharge = c.Decimal(nullable: false, precision: 18, scale: 2),
                         ApptDuration = c.Int(nullable: false),
+                        ApptColor = c.String(),
+                        ApptBorderColor = c.String(),
+                        ApptTextColor = c.String(),
                     })
                 .PrimaryKey(t => t.AppointmentTypeID);
             

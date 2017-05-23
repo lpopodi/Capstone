@@ -12,6 +12,9 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.AppointmentType.ApptColor)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.title)
         </th>
         <th>
@@ -37,6 +40,9 @@
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AppointmentType.ApptColor)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.title)
         </td>
