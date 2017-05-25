@@ -10,126 +10,122 @@ using pwlc.Models;
 
 namespace pwlc.Controllers
 {
-    public class CheckupsController : Controller
+    public class InvoicesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Checkups
+        // GET: Invoices
         public ActionResult Index()
         {
-            return View(db.Checkups.ToList());
+            return View(db.Invoices.ToList());
         }
 
-        // GET: Checkups/Details/5
+        // GET: Invoices/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Checkup checkup = db.Checkups.Find(id);
-            if (checkup == null)
+            Invoice invoice = db.Invoices.Find(id);
+            if (invoice == null)
             {
                 return HttpNotFound();
             }
-            return View(checkup);
+            return View(invoice);
         }
 
-        // GET: Checkups/Create
-        public ActionResult Create(string pid)
+        // GET: Invoices/Create
+        public ActionResult Create(int cid)
         {
-            if (pid == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            //if (cid == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
 
-            Patient patient = db.Patients.Find(pid);
-            Checkup checkup = new Checkup();
-            checkup.Patient = patient;
-            if (patient == null)
-            {
-                return HttpNotFound();
-            }
-            return View(checkup);
+            Checkup checkup = db.Checkups.Find(cid);
+            Patient patient = db.Patients.Where(p => p.PatientId == checkup.Patient.PatientId).First();
+            Invoice invoice = new Invoice();
+            invoice.Patient = patient;
+            //if (cid == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            return View(invoice);
         }
 
-        // POST: Checkups/Create
+        // POST: Invoices/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Checkup checkup, Patient patient)
+        public ActionResult Create(Invoice invoice, Checkup checkup, Patient patient, Item item)
         {
             if (ModelState.IsValid)
             {
-                checkup.Patient = db.Patients.Find(checkup.Patient.PatientId);
-                patient.Checkups.Add(checkup);
-                db.Checkups.Add(checkup);
+                invoice.InvoiceDate = DateTime.Now;
+                patient.Invoices.Add(invoice);
+                db.Invoices.Add(invoice);
                 db.SaveChanges();
-                //if (checkup.ScriptToFill == "Yes")
-                //{
-                //    return RedirectToAction("GenerateLabel")
-                //}
-                return RedirectToAction("Create", "Invoices", new { cid = checkup.CheckupId });
-                //return RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
 
-            return View(checkup);
+            return View(invoice);
         }
 
-        // GET: Checkups/Edit/5
+        // GET: Invoices/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Checkup checkup = db.Checkups.Find(id);
-            if (checkup == null)
+            Invoice invoice = db.Invoices.Find(id);
+            if (invoice == null)
             {
                 return HttpNotFound();
             }
-            return View(checkup);
+            return View(invoice);
         }
 
-        // POST: Checkups/Edit/5
+        // POST: Invoices/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CheckupId,CheckupDate,Age,Height,Weight,BP,BMI,BodyFat,LossGain,Amount,TotalLoss,DailyWaterIntake,Cycle,Excercising,FollowingFoodGuidelines,HCG,Hips,Waist,Chest,Arm,ScriptToFill,FillScript,StaffNotes,DoctorNotes,Signature")] Checkup checkup)
+        public ActionResult Edit([Bind(Include = "InvoiceId,InvoiceDate")] Invoice invoice)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(checkup).State = EntityState.Modified;
+                db.Entry(invoice).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(checkup);
+            return View(invoice);
         }
 
-        // GET: Checkups/Delete/5
+        // GET: Invoices/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Checkup checkup = db.Checkups.Find(id);
-            if (checkup == null)
+            Invoice invoice = db.Invoices.Find(id);
+            if (invoice == null)
             {
                 return HttpNotFound();
             }
-            return View(checkup);
+            return View(invoice);
         }
 
-        // POST: Checkups/Delete/5
+        // POST: Invoices/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Checkup checkup = db.Checkups.Find(id);
-            db.Checkups.Remove(checkup);
+            Invoice invoice = db.Invoices.Find(id);
+            db.Invoices.Remove(invoice);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

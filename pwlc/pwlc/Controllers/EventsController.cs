@@ -47,6 +47,8 @@ namespace pwlc.Controllers
             Patient patient = db.Patients.Find(pid);
             Event @event = new Event();
             @event.Patient = patient;
+            @event.eventId = "APT-" + Guid.NewGuid().ToString();
+            //@event.eventId = patient.Chart + "-" + Guid.NewGuid().ToString();
             @event.title = @event.Patient.FirstName + " " + @event.Patient.LastName;
             ViewBag.AppointmentTypeId = new SelectList(db.AppointmentTypes, "AppointmentTypeID", "ApptType");
             if (patient == null)
@@ -61,11 +63,11 @@ namespace pwlc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Event @event, DateTime StartDate, DateTime StartTime, AppointmentType AppointmentType)
+        public ActionResult Create(Event @event, DateTime StartDate, DateTime StartTime, AppointmentType AppointmentType, Patient patient)
         {
+
             if (ModelState.IsValid)
             {
-                @event.eventId = Guid.NewGuid().ToString();
                 var chosenType = db.AppointmentTypes.Where(t => t.AppointmentTypeID == @event.AppointmentTypeId).First();
                 var switchType = chosenType.ApptType.ToString();
                 switch (switchType)
@@ -85,6 +87,7 @@ namespace pwlc.Controllers
                     default:
                         break;
                 }
+                //context.Entry(detachedModel).State = EntityState.Unchanged;
                 @event.start = StartDate.ToString("yyyy-MM-dd ") + StartTime.ToString("HH:mm:ss");
                 @event.color = chosenType.ApptColor;
                 @event.borderColor = chosenType.ApptBorderColor;
@@ -94,6 +97,10 @@ namespace pwlc.Controllers
                 var EndDate = StartDate;
                 @event.end = EndDate.ToString("yyyy-MM-dd ") + EndTime.ToString("HH:mm:ss");
                 db.Events.Add(@event);
+                db.Patients.Attach(@event.Patient);
+                //db.Entry(patient).State = EntityState.Unchanged;
+                //db.Entry(patient).State = EntityState.Modified;
+                patient.Events.Add(@event);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

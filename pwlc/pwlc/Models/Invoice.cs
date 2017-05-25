@@ -10,13 +10,18 @@ namespace pwlc.Models
 {
     public class Invoice
     {
+        public Invoice()
+        {
+            Items = new List<Item>();
+        }
+
         [Key]
         [HiddenInput(DisplayValue = false)]
         public int InvoiceId { get; set; }
         public DateTime InvoiceDate { get; set; }
-        //[ForeignKey("AppointmentType")]
-        //public int ApptCharge { get; set; }
-        //public virtual AppointmentType AppointmentType { get; set; }
+        
         public virtual Patient Patient { get; set; }
+
+        public virtual ICollection<Item> Items { get; set; }
     }
 }

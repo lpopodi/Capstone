@@ -17,24 +17,18 @@ namespace pwlc.Models
         [HiddenInput(DisplayValue = false)]
         public string eventId { get; set; }
         [DataMember]
-        [HiddenInput(DisplayValue = false)]
         public string title { get; set; }
         [DataMember]
-        [HiddenInput(DisplayValue = false)]
         public string description { get; set; }
         [DataMember]
         public string start { get; set; }
         [DataMember]
-        [HiddenInput(DisplayValue = false)]
         public string end { get; set; }
         [DataMember]
-        [HiddenInput(DisplayValue = false)]
         public string color { get; set; }
         [DataMember]
-        [HiddenInput(DisplayValue = false)]
         public string borderColor { get; set; }
         [DataMember]
-        [HiddenInput(DisplayValue = false)]
         public string textColor { get; set; }
         [ForeignKey("AppointmentType")]
         public int AppointmentTypeId { get; set; }

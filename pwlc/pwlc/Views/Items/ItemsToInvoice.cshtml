@@ -1,0 +1,40 @@
+﻿@model IEnumerable<pwlc.Models.Item>
+@{
+    ViewBag.Title = "ItemsToInvoice";
+}
+
+<h2>ItemsToInvoice</h2>
+
+@using (Html.BeginForm())
+{
+    @*@Html.AntiForgeryToken()*@
+    foreach (var item in Model)
+    {
+        <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <div class="col-md-10">@Html.DisplayFor(modelItem => item.ItemName)</div>
+                
+                <div class="col-md-2">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">@Html.DisplayFor(modelItem => item.ItemPrice)</div>
+                
+                <div class="col-md-2"></div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">@Html.DisplayNameFor(model => model.ItemQuantity)</div>
+                
+                <div class="col-md-10">
+                    <input type="range" min="0" max="20" name="Quantity" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                </div>
+            </div>
+    </div>
+    }
+}
+

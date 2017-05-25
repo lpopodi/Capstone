@@ -15,6 +15,7 @@ namespace pwlc.Models
             Events = new List<Event>();
             Checkups = new List<Checkup>();
             Injections = new List<Injection>();
+            Invoices = new List<Invoice>();
         }
 
         [Key]
@@ -29,7 +30,7 @@ namespace pwlc.Models
         public string Zip { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
         public ContactMethod? ContactMethod { get; set; }
 

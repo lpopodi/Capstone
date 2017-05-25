@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,8 +9,18 @@ namespace PwlcApp.Controllers
 {
     public class HomeController : Controller
     {
+        private static log4net.ILog Log { get; set; }
+
+        ILog log = log4net.LogManager.GetLogger(typeof(HomeController)); //type of class
+
+
         public ActionResult Index()
         {
+            log.Debug("Debug Message");
+            log.Warn("Warn Message");
+            log.Fatal("Fatal Message");
+            log.Error("Error Message");
+
             return View();
         }
 

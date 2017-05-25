@@ -10,121 +10,107 @@ using pwlc.Models;
 
 namespace pwlc.Controllers
 {
-    public class InjectionsController : Controller
+    public class ItemsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Injections
+        // GET: Items
         public ActionResult Index()
         {
-            return View(db.Injections.ToList());
+            return View(db.Items.ToList());
         }
 
-        // GET: Injections/Details/5
-        public ActionResult Details(int? id)
+        // GET: Items/Details/5
+        public ActionResult Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Injection injection = db.Injections.Find(id);
-            if (injection == null)
+            Item item = db.Items.Find(id);
+            if (item == null)
             {
                 return HttpNotFound();
             }
-            return View(injection);
+            return View(item);
         }
 
-        // GET: Injections/Create
-        public ActionResult Create(string pid)
+        // GET: Items/Create
+        public ActionResult Create()
         {
-            if (pid == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            Patient patient = db.Patients.Find(pid);
-            Injection injection = new Injection();
-            injection.Patient = patient;
-            if (patient == null)
-            {
-                return HttpNotFound();
-            }
-            return View(injection);
+            return View();
         }
 
-        // POST: Injections/Create
+        // POST: Items/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Injection injection, Patient patient)
+        public ActionResult Create([Bind(Include = "ItemId,ItemName,ItemPrice")] Item item)
         {
             if (ModelState.IsValid)
             {
-                injection.Patient = db.Patients.Find(injection.Patient.PatientId);
-                patient.Injections.Add(injection);
-                db.Injections.Add(injection);
+                db.Items.Add(item);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(injection);
+            return View(item);
         }
 
-        // GET: Injections/Edit/5
-        public ActionResult Edit(int? id)
+        // GET: Items/Edit/5
+        public ActionResult Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Injection injection = db.Injections.Find(id);
-            if (injection == null)
+            Item item = db.Items.Find(id);
+            if (item == null)
             {
                 return HttpNotFound();
             }
-            return View(injection);
+            return View(item);
         }
 
-        // POST: Injections/Edit/5
+        // POST: Items/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "InjectionId,InjectionDate,LotNumber,ExpDate,InjectionLocation")] Injection injection)
+        public ActionResult Edit([Bind(Include = "ItemId,ItemName,ItemPrice")] Item item)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(injection).State = EntityState.Modified;
+                db.Entry(item).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(injection);
+            return View(item);
         }
 
-        // GET: Injections/Delete/5
-        public ActionResult Delete(int? id)
+        // GET: Items/Delete/5
+        public ActionResult Delete(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Injection injection = db.Injections.Find(id);
-            if (injection == null)
+            Item item = db.Items.Find(id);
+            if (item == null)
             {
                 return HttpNotFound();
             }
-            return View(injection);
+            return View(item);
         }
 
-        // POST: Injections/Delete/5
+        // POST: Items/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(string id)
         {
-            Injection injection = db.Injections.Find(id);
-            db.Injections.Remove(injection);
+            Item item = db.Items.Find(id);
+            db.Items.Remove(item);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -136,6 +122,13 @@ namespace pwlc.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult IndexItems()
+        {
+            var itemIndex = db.Items.Select(i => i).ToList();
+            
+            return View(itemIndex);
         }
     }
 }
