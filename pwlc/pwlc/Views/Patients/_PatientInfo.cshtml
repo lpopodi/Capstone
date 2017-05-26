@@ -1,11 +1,5 @@
 ﻿@model IEnumerable<pwlc.Models.Patient>
 
-@{
-    ViewBag.Title = "Index";
-}
-
-<h2>Index</h2>
-
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -48,7 +42,6 @@
     </tr>
 
 @foreach (var item in Model) {
-    //item.Address = Encryptor.Decrypt(item.Address);
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Chart)
@@ -84,12 +77,12 @@
             @Html.DisplayFor(modelItem => item.ContactMethod)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PatientId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PatientId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PatientId }) | 
-            @Html.ActionLink("Add Checkup", "Create", "Checkups", new { pid = item.PatientId }, null) |
-            @Html.ActionLink("Add Injection", "Create", "Injections", new { pid = item.PatientId }, null) |
-            @Html.ActionLink("Add Appointment", "Create", "Events", new { pid = item.PatientId }, null)
+           @Html.ActionLink("Edit", "Edit", new { id = item.PatientId }) |
+        @Html.ActionLink("Details", "Details", new { id = item.PatientId }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.PatientId }) |
+        @Html.ActionLink("Add Checkup", "Create", "Checkups", new { pid = item.PatientId }, null) |
+        @Html.ActionLink("Add Injection", "Create", "Injections", new { pid = item.PatientId }, null) |
+        @Html.ActionLink("Add Appointment", "Create", "Events", new { pid = item.PatientId }, null)
         </td>
     </tr>
 }

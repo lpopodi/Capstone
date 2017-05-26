@@ -196,9 +196,6 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="calendarjson.ashx.cs">
-      <DependentUpon>calendarjson.ashx</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AppointmentTypesController.cs" />
     <Compile Include="Controllers\CheckupsController.cs" />
@@ -210,6 +207,8 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PatientsController.cs" />
     <Compile Include="Controllers\PrescriptionsController.cs" />
+    <Compile Include="Crypto\Encryptor.cs" />
+    <Compile Include="Crypto\MyCrypto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -284,9 +283,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\TestViewModel.cs" />
-    <Compile Include="Views\Home\calendarjson.ashx.cs">
-      <DependentUpon>calendarjson.ashx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -345,7 +341,6 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="calendarjson.ashx" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\fullcalendar.js" />
     <Content Include="Scripts\fullcalendar.min.js" />
@@ -532,10 +527,12 @@
     <Content Include="Views\Invoices\Edit.cshtml" />
     <Content Include="Views\Invoices\Index.cshtml" />
     <Content Include="Views\Items\ItemsToInvoice.cshtml" />
-    <Content Include="Views\Home\calendarjson.ashx" />
+    <Content Include="Views\Patients\Profile.cshtml" />
+    <Content Include="Views\Patients\_PatientInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Signature-Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

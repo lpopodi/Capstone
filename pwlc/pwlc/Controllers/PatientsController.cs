@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using pwlc.Models;
+using pwlc.Crypto;
 
 namespace pwlc.Controllers
 {
@@ -17,6 +18,12 @@ namespace pwlc.Controllers
         // GET: Patients
         public ActionResult Index()
         {
+            //var allPatients = db.Patients.ToList();
+            //foreach (var patient in allPatients)
+            //{
+            //    patient.Address = Encryptor.Decrypt(patient.Address);
+            //}
+            //return View(allPatients);
             return View(db.Patients.ToList());
         }
 
@@ -51,6 +58,7 @@ namespace pwlc.Controllers
             if (ModelState.IsValid)
             {
                 patient.PatientId = Guid.NewGuid().ToString();
+                patient.Address = Encryptor.Encrypt(patient.Address);
                 db.Patients.Add(patient);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -67,6 +75,7 @@ namespace pwlc.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Patient patient = db.Patients.Find(id);
+            patient.Address = Encryptor.Decrypt(patient.Address);
             if (patient == null)
             {
                 return HttpNotFound();
@@ -83,6 +92,7 @@ namespace pwlc.Controllers
         {
             if (ModelState.IsValid)
             {
+                patient.Address = Encryptor.Encrypt(patient.Address);
                 db.Entry(patient).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

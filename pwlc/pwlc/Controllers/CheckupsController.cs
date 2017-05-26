@@ -13,6 +13,7 @@ namespace pwlc.Controllers
     public class CheckupsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private DateTime? birthday;
 
         // GET: Checkups
         public ActionResult Index()
@@ -63,6 +64,10 @@ namespace pwlc.Controllers
             if (ModelState.IsValid)
             {
                 checkup.Patient = db.Patients.Find(checkup.Patient.PatientId);
+                DateTime now = DateTime.Today;
+                //birthday = DateTime.Parse(patient.DateOfBirth.GetValueOrDefault().ToShortDateString() + " " + patient.DateOfBirth);
+                //int age = now.Year - birthday.Year;
+                //if (now < birthday.AddYears(age)) age--;
                 patient.Checkups.Add(checkup);
                 db.Checkups.Add(checkup);
                 db.SaveChanges();
@@ -141,6 +146,15 @@ namespace pwlc.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public static string Age(this HtmlHelper helper, DateTime birthday)
+        {
+            DateTime now = DateTime.Today;
+            int age = now.Year - birthday.Year;
+            if (now < birthday.AddYears(age)) age--;
+
+            return age.ToString();
         }
     }
 }

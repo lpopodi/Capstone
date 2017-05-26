@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using pwlc.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -30,6 +32,12 @@ namespace pwlc.Controllers
         public ActionResult Calendar()
         {
             return View();
+        }
+
+        public string CalJSON()
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            return JsonConvert.SerializeObject(db.Events.ToList());
         }
     }
 }
