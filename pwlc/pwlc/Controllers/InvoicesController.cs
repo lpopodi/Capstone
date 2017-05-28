@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using pwlc.Models;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace pwlc.Controllers
 {
@@ -18,6 +20,7 @@ namespace pwlc.Controllers
         public ActionResult Index()
         {
             return View(db.Invoices.ToList());
+            //return View(await db.Items.ToListAsync());
         }
 
         // GET: Invoices/Details/5
@@ -38,19 +41,11 @@ namespace pwlc.Controllers
         // GET: Invoices/Create
         public ActionResult Create(int cid)
         {
-            //if (cid == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-
             Checkup checkup = db.Checkups.Find(cid);
             Patient patient = db.Patients.Where(p => p.PatientId == checkup.Patient.PatientId).First();
             Invoice invoice = new Invoice();
             invoice.Patient = patient;
-            //if (cid == null)
-            //{
-            //    return HttpNotFound();
-            //}
+           
             return View(invoice);
         }
 
@@ -65,6 +60,26 @@ namespace pwlc.Controllers
             {
                 invoice.InvoiceDate = DateTime.Now;
                 patient.Invoices.Add(invoice);
+                //List<Item> lineItems = new List<Item>();
+                //var officeVisit = checkup.VisitType.ToString();
+                //switch (officeVisit)
+                //{
+                //    case "New":
+                //        var newVisit = db.AppointmentTypes.Where(a => a.AppointmentTypeID == 1).First();
+                //        lineItems.Add("NEWVISIT", newVisit.ApptType.ToString(), newVisit.ApptCharge, 1, null);
+                //        break;
+                //    case "Checkup":
+                //        var checkupVisit = db.AppointmentTypes.Where(a => a.AppointmentTypeID == 2).First();
+                //        lineItems.Add("WKLYVISIT", checkupVisit.ApptType.ToString(), checkupVisit.ApptCharge, 1, null);
+                //        break;
+                //    case "Restart":
+                //        var restartVisit = db.AppointmentTypes.Where(a => a.AppointmentTypeID == 3).First();
+                //        lineItems.Add("RESTART", restartVisit.ApptType.ToString(), restartVisit.ApptCharge, 1, null);
+                //        break;
+                //    default:
+                //        break;
+                //}
+
                 db.Invoices.Add(invoice);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -138,5 +153,87 @@ namespace pwlc.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult InvoiceAccount(int invId)
+        {
+            var thisInvoice = db.Invoices.Where(i => i.InvoiceId == invId).First();
+            return View(thisInvoice);
+        }
+
+
+
+        public ActionResult IndexItems()
+        {
+            var itemIndex = db.Items.Select(i => i).ToList();
+
+            return View(itemIndex);
+        }
+
+        public void AddToInvoice(int id, int quantity)
+        {
+            
+        }
+
+        public ActionResult CreateInvoice()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public JsonResult SaveOrder(Invoice In)
+        {
+            bool status = false;
+            if (ModelState.IsValid)
+            {
+                using (ApplicationDbContext dc = new ApplicationDbContext())
+                {
+                    Invoice invoice = new Invoice { InvoiceId = In.InvoiceId, InvoiceDate = In.InvoiceDate };
+                    foreach (var i in In.Items)
+                    {
+                        //
+                        // i.TotalAmount = 
+                        invoice.Items.Add(i);
+                    }
+                    dc.Invoices.Add(invoice);
+                    dc.SaveChanges();
+                    status = true;
+                }
+            }
+            else
+            {
+                status = false;
+            }
+            return new JsonResult { Data = new { status = status } };
+        }
+
+        [HttpGet]
+        public JsonResult SelectJSON()
+        {
+            var getItemList = db.Items.ToList();
+
+            List<object> jsonList = new List<object>();
+            //foreach (var item in searchList)
+            foreach (var item in getItemList)
+            {
+                jsonList.Add(new
+                {
+                    Id = item.ItemId,
+                    Name = item.ItemName,
+                    Price = item.ItemPrice,
+                });
+            }
+
+            return this.Json(jsonList, JsonRequestBehavior.AllowGet);
+        }
+
+        public static SelectList GetDropDownList()
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            var getItemList = db.Items.ToList();
+            SelectList myItemList = new SelectList(getItemList, "Id", "name");
+            //ViewBag.itemListName = myItemList;
+            return new SelectList(myItemList);
+        }
+
     }
 }

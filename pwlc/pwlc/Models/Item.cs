@@ -13,5 +13,8 @@ namespace pwlc.Models
         public string ItemName { get; set; }
         public decimal ItemPrice { get; set; }
         public int? ItemQuantity { get; set; }
+        //public decimal? ItemTotal { get; set; }
+
+        public virtual ICollection<Invoice> Invoices { get; set; }
     }
 }

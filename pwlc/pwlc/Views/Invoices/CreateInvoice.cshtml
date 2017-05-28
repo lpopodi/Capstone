@@ -1,0 +1,202 @@
+﻿@*@{
+    ViewBag.Title = "Index";
+    List<SelectListItem> ddllist =
+}*@
+
+    <div class="details">
+        <h4>Order Items</h4>
+        <table>
+            <tr>
+                <td>Item Name</td>
+                <td>Price</td>
+                <td>Quantity</td>
+                
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" id="itemName" />
+                    <span class="error">Item name required</span>
+                </td>
+                <td>
+                    <input type="text" id="price" />
+                    <span class="error">Valid rate required</span>
+                </td>
+                <td>
+                    <input type="text" id="quantity" />
+                    <span class="error">Valid quantity required</span>
+                </td>
+                
+                <td>
+                    <input type="button" id="add" value="add" />
+                </td>
+            </tr>
+        </table>
+        <div id="orderItems" class="tablecontainer">
+
+        </div>
+        <div style="padding:10px 0px; text-align:right">
+            <input id="submit" type="button" value="Save" style="padding:10px 20px" />
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+@section Scripts{
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            var orderItems = [];
+            //Add button click function
+            $('#add').click(function () {
+                //Check validation of order item
+                var isValidItem = true;
+                if ($('#itemName').val().trim() == '') {
+                    isValidItem = false;
+                    $('#itemName').siblings('span.error').css('visibility', 'visible');
+                }
+                else {
+                    $('#itemName').siblings('span.error').css('visibility', 'hidden');
+                }
+
+                if (!($('#price').val().trim() != '' && !isNaN($('#price').val().trim()))) {
+                    isValidItem = false;
+                    $('#price').siblings('span.error').css('visibility', 'visible');
+                }
+                else {
+                    $('#price').siblings('span.error').css('visibility', 'hidden');
+                }
+
+                if (!($('#quantity').val().trim() != '' && !isNaN($('#quantity').val().trim()))) {
+                    isValidItem = false;
+                    $('#quantity').siblings('span.error').css('visibility', 'visible');
+                }
+                else {
+                    $('#quantity').siblings('span.error').css('visibility', 'hidden');
+                }
+
+                //Add item to list if valid
+                if (isValidItem) {
+                    orderItems.push({
+                        ItemId: $('#itemId').val().trim(),
+                        ItemName: $('#itemName').val().trim(),
+                        ItemPrice: parseFloat($('#price').val().trim()),
+                        Quantity: parseInt($('#quantity').val().trim()),
+                        
+                        TotalAmount: parseInt($('#quantity').val().trim()) * parseFloat($('#price').val().trim())
+                    });
+
+                    //Clear fields
+                    $('#itemName').val('').focus();
+                    $('#quantity,#price').val('');
+
+                }
+                //populate order items
+                GeneratedItemsTable();
+
+            });
+            //Save button click function
+            $('#submit').click(function () {
+                //validation of order
+                var isAllValid = true;
+                if (orderItems.length == 0) {
+                    $('#orderItems').html('<span style="color:red;">Please add order items</span>');
+                    isAllValid = false;
+                }
+
+                if ($('#orderNo').val().trim() == '') {
+                    $('#orderNo').siblings('span.error').css('visibility', 'visible');
+                    isAllValid = false;
+                }
+                else {
+                    $('#orderNo').siblings('span.error').css('visibility', 'hidden');
+                }
+
+                if ($('#orderDate').val().trim() == '') {
+                    $('#orderDate').siblings('span.error').css('visibility', 'visible');
+                    isAllValid = false;
+                }
+                else {
+                    $('#orderDate').siblings('span.error').css('visibility', 'hidden');
+                }
+
+                //Save if valid
+                if (isAllValid) {
+                    var data = {
+                        OrderNo: $('#orderNo').val().trim(),
+                        OrderDate: $('#orderDate').val().trim(),
+                        OrderDetails : orderItems
+                    }
+
+                    $(this).val('Please wait...');
+
+                    $.ajax({
+                        url: '/Invoice/SaveOrder',
+                        type: "POST",
+                        data: JSON.stringify(data),
+                        dataType: "JSON",
+                        contentType: "application/json",
+                        success: function (d) {
+                            //check is successfully save to database
+                            if (d.status == true) {
+                                //will send status from server side
+                                alert('Successfully done.');
+                                //clear form
+                                orderItems = [];
+                                $('#orderNo').val('');
+                                $('#orderDate').val('');
+                                $('#orderItems').empty();
+                            }
+                            else {
+                                alert('Failed');
+                            }
+                            $('#submit').val('Save');
+                        },
+                        error: function () {
+                            alert('Error. Please try again.');
+                            $('#submit').val('Save');
+                        }
+                    });
+                }
+
+            });
+            //function for show added items in table
+            function GeneratedItemsTable() {
+                if (orderItems.length > 0)
+                {
+                    var $table = $('<table/>');
+                    $table.append('<thead><tr><th>Item</th><th>Quantity</th><th>Rate</th><th>Total</th><th></th></tr></thead>');
+                    var $tbody = $('<tbody/>');
+                    $.each(orderItems, function (i, val) {
+                        var $row = $('<tr/>');
+                        $row.append($('<td/>').html(val.ItemName));
+                        $row.append($('<td/>').html(val.Quantity));
+                        $row.append($('<td/>').html(val.Rate));
+                        $row.append($('<td/>').html(val.TotalAmount));
+                        var $remove = $('<a href="#">Remove</a>');
+                        $remove.click(function (e) {
+                            e.preventDefault();
+                            orderItems.splice(i, 1);
+                            GeneratedItemsTable();
+                        });
+                        $row.append($('<td/>').html($remove));
+                        $tbody.append($row);
+                    });
+                    console.log("current", orderItems);
+                    $table.append($tbody);
+                    $('#orderItems').html($table);
+                }
+                else {
+                    $('#orderItems').html('');
+                }
+            }
+        });
+
+    </script>
+
+<script type="text/javascript" src="@Url.Content("/Scripts/App/searchSelectionDialog.js")"></script>
+<script type="text/javascript" src="@Url.Content("/Scripts/App/index.js")"></script>
+
+}
+

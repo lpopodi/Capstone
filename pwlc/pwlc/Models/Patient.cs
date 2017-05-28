@@ -30,7 +30,7 @@ namespace pwlc.Models
         public string Zip { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public DateTime? DateOfBirth { get; set; }
+        public string DateOfBirth { get; set; }
 
         public ContactMethod? ContactMethod { get; set; }
 

@@ -1,0 +1,171 @@
+﻿@model IEnumerable<pwlc.Models.Checkup>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CheckupDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Age)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Height)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Weight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BMI)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BodyFat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LossGain)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalLoss)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DailyWaterIntake)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cycle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Excercising)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FollowingFoodGuidelines)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HCG)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hips)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Waist)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Chest)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Arm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ScriptToFill)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FillScript)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StaffNotes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DoctorNotes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Signature)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VisitType)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CheckupDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Age)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Height)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Weight)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BMI)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BodyFat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LossGain)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalLoss)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DailyWaterIntake)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cycle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Excercising)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FollowingFoodGuidelines)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HCG)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hips)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Waist)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Chest)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Arm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ScriptToFill)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FillScript)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StaffNotes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DoctorNotes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Signature)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VisitType)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CheckupId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CheckupId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CheckupId })
+        </td>
+    </tr>
+}
+
+</table>

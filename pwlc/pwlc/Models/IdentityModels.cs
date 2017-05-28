@@ -39,4 +39,9 @@ namespace pwlc.Models
         public DbSet<AppointmentType> AppointmentTypes { get; set; }
         public DbSet<Prescription> Prescriptions { get; set; }
     }
+
+    public class AuditingContext : DbContext
+    {
+        public DbSet<Audit> AuditRecords { get; set; }
+    }
 }

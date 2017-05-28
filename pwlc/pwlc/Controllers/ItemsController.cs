@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -13,6 +14,7 @@ namespace pwlc.Controllers
     public class ItemsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private static IEnumerable ddList;
 
         // GET: Items
         public ActionResult Index()
@@ -46,7 +48,7 @@ namespace pwlc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ItemId,ItemName,ItemPrice")] Item item)
+        public ActionResult Create([Bind(Include = "ItemId,ItemName,ItemPrice,ItemQuantity")] Item item)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +80,7 @@ namespace pwlc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ItemId,ItemName,ItemPrice")] Item item)
+        public ActionResult Edit([Bind(Include = "ItemId,ItemName,ItemPrice,ItemQuantity")] Item item)
         {
             if (ModelState.IsValid)
             {
@@ -130,5 +132,17 @@ namespace pwlc.Controllers
             
             return View(itemIndex);
         }
+
+        public static SelectList GetDropDownList()
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            var getItemList = db.Items.ToList();
+            SelectList myItemList = new SelectList(getItemList, "Id", "name");
+            //ViewBag.itemListName = myItemList;
+            return new SelectList(myItemList);
+        }
+
+        
+
     }
 }
