@@ -20,4 +20,9 @@ namespace pwlc.Models
         }
     }
 
+    public class AuditingContext : DbContext
+    {
+        public DbSet<Audit> AuditRecords { get; set; }
+    }
+
 }

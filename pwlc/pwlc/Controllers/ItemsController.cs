@@ -17,12 +17,14 @@ namespace pwlc.Controllers
         private static IEnumerable ddList;
 
         // GET: Items
+        [Authorize(Roles = "Admin,Employee,Manager,Doctor")]
         public ActionResult Index()
         {
             return View(db.Items.ToList());
         }
 
         // GET: Items/Details/5
+        [Authorize(Roles = "Admin,Employee,Manager,Doctor")]
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -38,6 +40,7 @@ namespace pwlc.Controllers
         }
 
         // GET: Items/Create
+        [Authorize(Roles = "Admin,Employee,Manager,Doctor")]
         public ActionResult Create()
         {
             return View();
@@ -61,6 +64,7 @@ namespace pwlc.Controllers
         }
 
         // GET: Items/Edit/5
+        [Authorize(Roles = "Admin,Employee,Manager,Doctor")]
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -92,6 +96,7 @@ namespace pwlc.Controllers
         }
 
         // GET: Items/Delete/5
+        [Authorize(Roles = "Admin,Employee,Manager,Doctor")]
         public ActionResult Delete(string id)
         {
             if (id == null)

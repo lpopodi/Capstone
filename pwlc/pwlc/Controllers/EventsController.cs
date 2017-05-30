@@ -15,6 +15,7 @@ namespace pwlc.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Events
+        [Authorize(Roles = "Admin,Employee,Manager,Doctor")]
         public ActionResult Index()
         {
             var events = db.Events.Include(a => a.AppointmentType);
@@ -22,6 +23,7 @@ namespace pwlc.Controllers
         }
 
         // GET: Events/Details/5
+        [Authorize(Roles = "Admin,Employee,Manager,Doctor")]
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -37,6 +39,7 @@ namespace pwlc.Controllers
         }
 
         // GET: Events/Create
+        [Authorize(Roles = "Admin,Employee,Manager,Doctor")]
         public ActionResult Create(string pid)
         {
             if (pid == null)
@@ -110,6 +113,7 @@ namespace pwlc.Controllers
         }
 
         // GET: Events/Edit/5
+        [Authorize(Roles = "Admin,Employee,Manager,Doctor")]
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -143,6 +147,7 @@ namespace pwlc.Controllers
         }
 
         // GET: Events/Delete/5
+        [Authorize(Roles = "Admin,Employee,Manager,Doctor")]
         public ActionResult Delete(string id)
         {
             if (id == null)

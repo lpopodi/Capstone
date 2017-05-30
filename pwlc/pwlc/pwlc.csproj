@@ -44,6 +44,23 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DYMO.Common, Version=8.5.1.1816, Culture=neutral, PublicKeyToken=5426002a38745af9, processorArchitecture=MSIL">
+      <HintPath>..\packages\DYMO.Label.8.5.1.04\lib\net45\DYMO.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DYMO.DLS.Runtime, Version=8.5.1.1816, Culture=neutral, PublicKeyToken=5426002a38745af9, processorArchitecture=MSIL">
+      <HintPath>..\packages\DYMO.Label.8.5.1.04\lib\net45\DYMO.DLS.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DYMO.Label.Framework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5426002a38745af9, processorArchitecture=MSIL">
+      <HintPath>..\packages\DYMO.Label.8.5.1.04\lib\net45\DYMO.Label.Framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Interop.DYMOPrintingSupportLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5426002a38745af9, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\packages\DYMO.Label.8.5.1.04\lib\net45\Interop.DYMOPrintingSupportLib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -301,11 +318,20 @@
     <Compile Include="Migrations\201705281926165_ making sure all edits are updated as of now.Designer.cs">
       <DependentUpon>201705281926165_ making sure all edits are updated as of now.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705291956033_adding to prescription modal.cs" />
+    <Compile Include="Migrations\201705291956033_adding to prescription modal.Designer.cs">
+      <DependentUpon>201705291956033_adding to prescription modal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705300358483_adding model for contact.cs" />
+    <Compile Include="Migrations\201705300358483_adding model for contact.Designer.cs">
+      <DependentUpon>201705300358483_adding model for contact.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AppointmentType.cs" />
     <Compile Include="Models\Audit.cs" />
     <Compile Include="Models\Checkup.cs" />
+    <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -376,6 +402,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Labels\PatientLabel.label" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\fullcalendar.js" />
     <Content Include="Scripts\fullcalendar.min.js" />
@@ -481,6 +508,7 @@
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\myScripts.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -540,11 +568,6 @@
     <Content Include="Views\AppointmentTypes\Edit.cshtml" />
     <Content Include="Views\AppointmentTypes\Index.cshtml" />
     <Content Include="Views\AppointmentTypes\AppointmentPicker.cshtml" />
-    <Content Include="Views\Prescriptions\Create.cshtml" />
-    <Content Include="Views\Prescriptions\Delete.cshtml" />
-    <Content Include="Views\Prescriptions\Details.cshtml" />
-    <Content Include="Views\Prescriptions\Edit.cshtml" />
-    <Content Include="Views\Prescriptions\Index.cshtml" />
     <Content Include="Views\Patients\GenerateLabel.cshtml" />
     <Content Include="Views\Events\Create.cshtml" />
     <Content Include="Views\Events\Delete.cshtml" />
@@ -576,6 +599,12 @@
     <Content Include="Views\Items\IndexItems.cshtml" />
     <Content Include="Views\Invoices\IndexItems.cshtml" />
     <Content Include="Views\Invoices\CreateInvoice.cshtml" />
+    <Content Include="Views\Prescriptions\Create.cshtml" />
+    <Content Include="Views\Prescriptions\Delete.cshtml" />
+    <Content Include="Views\Prescriptions\Details.cshtml" />
+    <Content Include="Views\Prescriptions\Edit.cshtml" />
+    <Content Include="Views\Prescriptions\Index.cshtml" />
+    <Content Include="Views\Prescriptions\ReviewLabelInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -651,6 +680,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705281926165_ making sure all edits are updated as of now.resx">
       <DependentUpon>201705281926165_ making sure all edits are updated as of now.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705291956033_adding to prescription modal.resx">
+      <DependentUpon>201705291956033_adding to prescription modal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705300358483_adding model for contact.resx">
+      <DependentUpon>201705300358483_adding model for contact.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

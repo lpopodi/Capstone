@@ -1,0 +1,55 @@
+﻿@model IEnumerable<pwlc.Models.Prescription>
+
+
+@foreach (var item in Model)
+{
+    <div class="row">
+        <div class="col-md-6">
+            @Html.DisplayFor(modelItem => item.Patient.FirstName) @Html.DisplayFor(modelItem => item.Patient.LastName)
+        </div>
+        <div class="col-md-6">
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            @Html.DisplayFor(modelItem => item.Patient.Address)
+        </div>
+        <div class="col-md-6">
+            @Html.DisplayFor(modelItem => item.ScriptRx)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            @Html.DisplayFor(modelItem => item.Patient.City), @Html.DisplayFor(modelItem => item.Patient.State) @Html.DisplayFor(modelItem => item.Patient.Zip)
+        </div>
+        <div class="col-md-6">
+            @Html.DisplayFor(modelItem => item.Patient.DateOfBirth)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            @Html.DisplayFor(modelItem => item.ScriptName)
+        </div>
+        <div class="col-md-6">
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            @Html.DisplayFor(modelItem => item.ScriptDirections)
+        </div>
+        <div class="col-md-6">
+            No Refills
+        </div>
+    </div>
+
+    @Html.ActionLink("Print", "Print", new { id = item.ScriptId }) |
+
+}
+
+

@@ -15,12 +15,14 @@ namespace pwlc.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Injections
+        [Authorize(Roles = "Admin,Employee,Manager,Doctor")]
         public ActionResult Index()
         {
             return View(db.Injections.ToList());
         }
 
         // GET: Injections/Details/5
+        [Authorize(Roles = "Admin,Employee,Manager,Doctor")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,6 +38,7 @@ namespace pwlc.Controllers
         }
 
         // GET: Injections/Create
+        [Authorize(Roles = "Admin,Employee,Manager,Doctor")]
         public ActionResult Create(string pid)
         {
             if (pid == null)
@@ -73,6 +76,7 @@ namespace pwlc.Controllers
         }
 
         // GET: Injections/Edit/5
+        [Authorize(Roles = "Admin,Employee,Manager,Doctor")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -104,6 +108,7 @@ namespace pwlc.Controllers
         }
 
         // GET: Injections/Delete/5
+        [Authorize(Roles = "Admin,Employee,Manager,Doctor")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

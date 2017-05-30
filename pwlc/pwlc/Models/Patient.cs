@@ -16,6 +16,8 @@ namespace pwlc.Models
             Checkups = new List<Checkup>();
             Injections = new List<Injection>();
             Invoices = new List<Invoice>();
+            Prescriptions = new List<Prescription>();
+            Contacts = new List<Contact>();
         }
 
         [Key]
@@ -38,6 +40,8 @@ namespace pwlc.Models
         public virtual ICollection<Checkup> Checkups { get; set; }
         public virtual ICollection<Injection> Injections { get; set; }
         public virtual ICollection<Invoice> Invoices { get; set; }
+        public virtual ICollection<Prescription> Prescriptions { get; set; }
+        public virtual ICollection<Contact> Contacts { get; set; }
     }
 
     public enum ContactMethod

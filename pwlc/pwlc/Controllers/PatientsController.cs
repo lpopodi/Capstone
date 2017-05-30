@@ -16,6 +16,7 @@ namespace pwlc.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Patients
+        [Authorize(Roles = "Admin,Employee,Manager,Doctor")]
         public ActionResult Index()
         {
             //var allPatients = db.Patients.ToList();
@@ -28,6 +29,7 @@ namespace pwlc.Controllers
         }
 
         // GET: Patients/Details/5
+        [Authorize(Roles = "Admin,Employee,Manager,Doctor")]
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -43,6 +45,7 @@ namespace pwlc.Controllers
         }
 
         // GET: Patients/Create
+        [Authorize(Roles = "Admin,Employee,Manager,Doctor")]
         public ActionResult Create()
         {
             return View();
@@ -68,6 +71,7 @@ namespace pwlc.Controllers
         }
 
         // GET: Patients/Edit/5
+        [Authorize(Roles = "Admin,Employee,Manager,Doctor")]
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -101,6 +105,7 @@ namespace pwlc.Controllers
         }
 
         // GET: Patients/Delete/5
+        [Authorize(Roles = "Admin,Employee,Manager,Doctor")]
         public ActionResult Delete(string id)
         {
             if (id == null)

@@ -18,12 +18,14 @@ namespace pwlc.Controllers
         //private DateTime? birthday;
 
         // GET: Checkups
+        [Authorize(Roles = "Admin,Employee,Manager,Doctor")]
         public ActionResult Index()
         {
             return View(db.Checkups.ToList());
         }
 
         // GET: Checkups/Details/5
+        [Authorize(Roles = "Admin,Employee,Manager,Doctor")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -39,7 +41,7 @@ namespace pwlc.Controllers
         }
 
         // GET: Checkups/Create
-        [Audit]
+        [Authorize(Roles = "Admin,Employee,Manager,Doctor")]
         public ActionResult Create(string pid)
         {
             if (pid == null)
@@ -62,6 +64,7 @@ namespace pwlc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Audit]
         public ActionResult Create(Checkup checkup, Patient patient)
         {
             if (ModelState.IsValid)
@@ -86,6 +89,7 @@ namespace pwlc.Controllers
         }
 
         // GET: Checkups/Edit/5
+        [Authorize(Roles = "Admin,Employee,Manager,Doctor")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -105,6 +109,7 @@ namespace pwlc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Audit]
         public ActionResult Edit([Bind(Include = "CheckupId,CheckupDate,Age,Height,Weight,BP,BMI,BodyFat,LossGain,Amount,TotalLoss,DailyWaterIntake,Cycle,Excercising,FollowingFoodGuidelines,HCG,Hips,Waist,Chest,Arm,ScriptToFill,FillScript,StaffNotes,DoctorNotes,Signature")] Checkup checkup)
         {
             if (ModelState.IsValid)
@@ -117,6 +122,7 @@ namespace pwlc.Controllers
         }
 
         // GET: Checkups/Delete/5
+        [Authorize(Roles = "Admin,Employee,Manager,Doctor")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -134,6 +140,7 @@ namespace pwlc.Controllers
         // POST: Checkups/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Audit]
         public ActionResult DeleteConfirmed(int id)
         {
             Checkup checkup = db.Checkups.Find(id);
