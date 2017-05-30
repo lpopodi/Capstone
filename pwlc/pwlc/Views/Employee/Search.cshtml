@@ -44,9 +44,12 @@
                 @Html.DisplayFor(modelItem => item.LastName)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.PatientId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.PatientId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.PatientId })
+                @Html.ActionLink("Edit", "Edit", "Patients", new { id = item.PatientId }) |
+                @Html.ActionLink("Details", "Details", "Patients", new { id = item.PatientId }) |
+                @Html.ActionLink("Delete", "Delete", "Patients", new { id = item.PatientId }) |
+                @Html.ActionLink("Add Checkup", "Create", "Checkups", new { pid = item.PatientId }, null) |
+                @Html.ActionLink("Add Injection", "Create", "Injections", new { pid = item.PatientId }, null) |
+                @Html.ActionLink("Add Appointment", "Create", "Events", new { pid = item.PatientId }, null)
             </td>
         </tr>
     }

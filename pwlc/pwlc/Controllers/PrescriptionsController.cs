@@ -41,7 +41,7 @@ namespace pwlc.Controllers
 
         // GET: Prescriptions/Create
         [Authorize(Roles = "Admin,Employee,Manager,Doctor")]
-        public ActionResult Create(string pid, int cid)
+        public ActionResult Create(string pid/*, int cid*/)
         {
             if (pid == null)
             {
@@ -49,7 +49,7 @@ namespace pwlc.Controllers
             }
 
             Patient patient = db.Patients.Find(pid);
-            Checkup checkup = db.Checkups.Find(cid);
+            //Checkup checkup = db.Checkups.Find(cid);
             Prescription prescription = new Prescription();
             prescription.Patient = patient;
             if (patient == null)
@@ -65,7 +65,7 @@ namespace pwlc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Prescription prescription, Patient patient, Checkup checkup)
+        public ActionResult Create(Prescription prescription, Patient patient)
         {
             if (ModelState.IsValid)
             {
@@ -75,7 +75,7 @@ namespace pwlc.Controllers
                 db.Prescriptions.Add(prescription);
                 patient.Prescriptions.Add(prescription);
                 db.SaveChanges();
-                return RedirectToAction("ReviewLabelInfo", new { sid = prescription.ScriptId, pid = patient.PatientId });
+                return RedirectToAction("ReviewLabelInfo", new { sid = prescription.ScriptId/*, pid = patient.PatientId*/ });
                 //return RedirectToAction("Create", "Invoices", new { cid = checkup.CheckupId });
             }
 

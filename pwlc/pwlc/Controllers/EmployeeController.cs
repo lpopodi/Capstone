@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using DYMO.Label.Framework;
+using Newtonsoft.Json;
 using pwlc.Models;
 using System;
 using System.Collections.Generic;
@@ -52,20 +53,39 @@ namespace pwlc.Controllers
             var patientCheckups = db.Patients.ToList();
             foreach (var patient in patientCheckups)
             {
-                var lastCheckup = patient.Checkups.Last();
-                var lastCheckupDate = lastCheckup.CheckupDate;
-                TimeSpan t = today - lastCheckupDate;
-                double NumOfDays = t.TotalDays;
-                if (NumOfDays > numDayCheck)
+                if (patient.Checkups.Count >= 1)
                 {
-                    neglectList.Add(patient);
+                    var lastCheckup = patient.Checkups.Last();
+                    var lastCheckupDate = lastCheckup.CheckupDate;
+                    TimeSpan t = today - lastCheckupDate;
+                    double NumOfDays = t.TotalDays;
+                    if (NumOfDays > numDayCheck)
+                    {
+                        neglectList.Add(patient);
+                    }
                 }
-
             }
             ViewBag.Report = neglectList;
             return View();
         }
 
+        public void Print(int? id)
+        {
+            //Prescription prescription = db.Prescriptions.Find(id);
+            //Patient patient = db.Patients.Where(p => p.PatientId == prescription.Patient.PatientId).First();
+            var today = DateTime.Today.ToString();
+            var label = Label.Open(AppDomain.CurrentDomain.BaseDirectory + "Labels/PatientLabel.label");
+            label.SetObjectText("lblName", "FirstName LastName");
+            label.SetObjectText("lblToday", today);
+            label.SetObjectText("lblAddress", "Address Line 1");
+            label.SetObjectText("lblRxNum", "RX#");
+            label.SetObjectText("lblAddres2", "Address Line 2");
+            label.SetObjectText("lblDob", "Date of Birth");
+            label.SetObjectText("lblPrescription", "Prescription");
+            label.SetObjectText("lblDirections", "Directions");
+            label.SetObjectText("lblRefill", "No Refills");
+            label.Print("DYMO LabelWriter 450");
+        }
 
     }
 }

@@ -34,6 +34,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -55,6 +56,10 @@
     <Reference Include="DYMO.Label.Framework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5426002a38745af9, processorArchitecture=MSIL">
       <HintPath>..\packages\DYMO.Label.8.5.1.04\lib\net45\DYMO.Label.Framework.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="Interop.Dymo">
+      <HintPath>..\..\..\..\..\Downloads\SDKSamples\SDK Samples\High Level COM\dotNet\C# Sample\bin\Release\Interop.Dymo.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="Interop.DYMOPrintingSupportLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5426002a38745af9, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -715,6 +720,17 @@
     <EmbeddedResource Include="Migrations\201705301147059_edit to checkup model.resx">
       <DependentUpon>201705301147059_edit to checkup model.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="DYMOLabelFrameworkIEPluginLib">
+      <Guid>{6AA6CD14-880F-44F8-BAB4-9B76DCA24E1A}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

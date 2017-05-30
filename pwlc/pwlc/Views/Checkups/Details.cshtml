@@ -206,5 +206,6 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.CheckupId }) |
+    @Html.ActionLink("Sign off on Checkup", "AddSignature", new { id = Model.CheckupId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

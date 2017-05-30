@@ -78,12 +78,12 @@ namespace pwlc.Controllers
                 patient.Checkups.Add(checkup);
                 db.Checkups.Add(checkup);
                 db.SaveChanges();
-                if (checkup.ScriptToFill.ToString() == "Yes")
-                {
-                    return RedirectToAction("Create", "Prescriptions", new { cid = checkup.CheckupId, pid = patient.PatientId });
-                }
-                return RedirectToAction("Create", "Invoices", new { cid = checkup.CheckupId });
-                //return RedirectToAction("Index");
+                //if (checkup.ScriptToFill.ToString() == "Yes")
+                //{
+                //    return RedirectToAction("Create", "Prescriptions", new { /*cid = checkup.CheckupId,*/ pid = patient.PatientId });
+                //}
+                //return RedirectToAction("Create", "Invoices", new { cid = checkup.CheckupId });
+                return RedirectToAction("Index");
             }
 
             return View(checkup);
@@ -159,13 +159,17 @@ namespace pwlc.Controllers
             base.Dispose(disposing);
         }
 
-        public void AddSignature(int cid)
+        [Authorize(Roles = "Admin")]
+        [Audit]
+        public ActionResult AddSignature(int cid)
         {
             var holder = User.Identity.GetUserId();
             var user = db.Users.Where(s => s.Id == holder).FirstOrDefault();
             Checkup checkup = db.Checkups.Find(cid);
             checkup.Signature = "/Signature-Images/dr-test-doctor.png";
             db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
     }
