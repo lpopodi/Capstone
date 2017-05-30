@@ -37,7 +37,7 @@ namespace pwlc.Models
         public FillScript? FillScript { get; set; }
         public string StaffNotes { get; set; }
         public string DoctorNotes { get; set; }
-        public byte? Signature { get; set; }
+        public string Signature { get; set; }
         public VisitType? VisitType { get; set; }
         
         public virtual Patient Patient { get; set; }

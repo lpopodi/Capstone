@@ -1,1 +1,35 @@
 ﻿
+@{
+    ViewBag.Title = "Report";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div id="patient">
+    <div class="row">
+        <div class="col-md-1"><h5>Chart</h5></div>
+        <div class="col-md-2"><h5>Name</h5></div>
+        <div class="col-md-2"><h5>Phone</h5></div>
+        <div class="col-md-2"><h5>Email</h5></div>
+        <div class="col-md-2"><h5>Contact Preference</h5></div>
+        <div class="col-md-3"></div>
+    </div>
+    <hr />
+    @foreach (var item in ViewBag.Report)
+    {
+        <div class="row">
+            <div class="col-md-1">@item.Chart</div>
+            <div class="col-md-2">@item.FirstName @item.LastName</div>
+            <div class="col-md-2">@item.Phone</div>
+            <div class="col-md-2">@item.Email</div>
+            <div class="col-md-2">@item.ContactMethod</div>
+            @*<div class="col-md-2">@item.Checkup.CheckupDate.Last()</div>*@
+            <div class="col-md-3">
+                @Html.ActionLink("Document Contact", "Create", "Contacts", new { id = item.PatientId }, null)
+            </div>
+        </div>
+    }
+</div>

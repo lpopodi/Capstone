@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using pwlc.Models;
+using Microsoft.AspNet.Identity;
 
 namespace pwlc.Controllers
 {
@@ -77,10 +78,10 @@ namespace pwlc.Controllers
                 patient.Checkups.Add(checkup);
                 db.Checkups.Add(checkup);
                 db.SaveChanges();
-                //if (checkup.ScriptToFill == "Yes")
-                //{
-                //    return RedirectToAction("GenerateLabel")
-                //}
+                if (checkup.ScriptToFill.ToString() == "Yes")
+                {
+                    return RedirectToAction("Create", "Prescriptions", new { cid = checkup.CheckupId, pid = patient.PatientId });
+                }
                 return RedirectToAction("Create", "Invoices", new { cid = checkup.CheckupId });
                 //return RedirectToAction("Index");
             }
@@ -158,6 +159,14 @@ namespace pwlc.Controllers
             base.Dispose(disposing);
         }
 
-        
+        public void AddSignature(int cid)
+        {
+            var holder = User.Identity.GetUserId();
+            var user = db.Users.Where(s => s.Id == holder).FirstOrDefault();
+            Checkup checkup = db.Checkups.Find(cid);
+            checkup.Signature = "/Signature-Images/dr-test-doctor.png";
+            db.SaveChanges();
+        }
+
     }
 }

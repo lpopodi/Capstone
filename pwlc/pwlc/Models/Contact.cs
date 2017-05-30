@@ -10,8 +10,9 @@ namespace pwlc.Models
     {
         [Key]
         public int ContactId { get; set; }
+        public DateTime ContactDate { get; set; }
         public string ContactDescription { get; set; }
 
-        public virtual Patient patient { get; set; }
+        public virtual Patient Patient { get; set; }
     }
 }

@@ -75,7 +75,8 @@ namespace pwlc.Controllers
                 db.Prescriptions.Add(prescription);
                 patient.Prescriptions.Add(prescription);
                 db.SaveChanges();
-                return RedirectToAction("Create", "Invoices", new { cid = checkup.CheckupId });
+                return RedirectToAction("ReviewLabelInfo", new { sid = prescription.ScriptId, pid = patient.PatientId });
+                //return RedirectToAction("Create", "Invoices", new { cid = checkup.CheckupId });
             }
 
             return View(prescription);
@@ -156,17 +157,18 @@ namespace pwlc.Controllers
         }
 
         [Authorize(Roles = "Admin,Employee,Manager,Doctor")]
-        public ActionResult ReviewLabelInfo(int? id)
+        public ActionResult ReviewLabelInfo(int? sid, string pid)
         {
-            if (id == null)
+            if (sid == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Prescription prescription = db.Prescriptions.Find(id);
+            Prescription prescription = db.Prescriptions.Find(sid);
+            Patient patient = db.Patients.Where(p => p.PatientId == prescription.Patient.PatientId).First();
             prescription.ScriptName = Encryptor.Decrypt(prescription.ScriptName);
             prescription.ScriptRx = Encryptor.Decrypt(prescription.ScriptRx);
             prescription.ScriptDirections = Encryptor.Decrypt(prescription.ScriptDirections);
-            prescription.Patient.Address = Encryptor.Decrypt(prescription.Patient.Address);
+            patient.Address = Encryptor.Decrypt(patient.Address);
             if (prescription == null)
             {
                 return HttpNotFound();
@@ -178,14 +180,15 @@ namespace pwlc.Controllers
         public void Print(int? id)
         {
             Prescription prescription = db.Prescriptions.Find(id);
+            Patient patient = db.Patients.Where(p => p.PatientId == prescription.Patient.PatientId).First();
             var today = DateTime.Today.ToString();
             var label = Label.Open(AppDomain.CurrentDomain.BaseDirectory + "Labels/PatientLabel.label");
-            label.SetObjectText("lblName", prescription.Patient.FirstName + " " + prescription.Patient.LastName);
+            label.SetObjectText("lblName", patient.FirstName + " " + patient.LastName);
             label.SetObjectText("lblToday", today);
-            label.SetObjectText("lblAddress", Encryptor.Decrypt(prescription.Patient.Address));
+            label.SetObjectText("lblAddress", Encryptor.Decrypt(patient.Address));
             label.SetObjectText("lblRxNum", "RX#" + Encryptor.Decrypt(prescription.ScriptRx));
-            label.SetObjectText("lblAddres2", prescription.Patient.City + ", " + prescription.Patient.State + " " + prescription.Patient.Zip);
-            label.SetObjectText("lblDob", prescription.Patient.DateOfBirth);
+            label.SetObjectText("lblAddres2", patient.City + ", " + patient.State + " " + patient.Zip);
+            label.SetObjectText("lblDob", patient.DateOfBirth);
             label.SetObjectText("lblPrescription", Encryptor.Decrypt(prescription.ScriptName));
             label.SetObjectText("lblDirections", Encryptor.Decrypt(prescription.ScriptDirections));
             label.SetObjectText("lblRefill", "No Refills");

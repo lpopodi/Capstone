@@ -27,9 +27,9 @@
             $('#calendar').fullCalendar({
                 theme: true,
                 header: {
-                    left: 'prev,next today',
+                    //left: 'prev,next today',
                     center: 'title',
-                    right: 'month,agendaWeek,agendaDay'
+                    //right: 'month,agendaWeek,agendaDay'
                 },
 
                 defaultView: 'agendaDay',
@@ -60,6 +60,10 @@
         <div id="calendar"></div>
     </div>
     <div class="col-md-6">
+        <br /><br />
+        <p><a href="/Patient/Create" class="btn btn-primary btn-lg">Add New Patient</a></p>
+        <p><a href="/Employee/Search" class="btn btn-primary btn-lg">Search Patient</a></p>
+        <p><a href="/Employee/Report" class="btn btn-primary btn-lg">Check Report</a></p>
         @Html.ActionLink("Add New Patient", "Create", "Patients") 
     </div>
 

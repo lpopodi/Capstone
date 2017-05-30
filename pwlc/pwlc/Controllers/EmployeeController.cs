@@ -62,7 +62,8 @@ namespace pwlc.Controllers
                 }
 
             }
-            return View(neglectList);
+            ViewBag.Report = neglectList;
+            return View();
         }
 
 

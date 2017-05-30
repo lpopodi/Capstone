@@ -217,6 +217,7 @@
     <Compile Include="Controllers\AppointmentTypesController.cs" />
     <Compile Include="Controllers\AuditController.cs" />
     <Compile Include="Controllers\CheckupsController.cs" />
+    <Compile Include="Controllers\ContactsController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -325,6 +326,18 @@
     <Compile Include="Migrations\201705300358483_adding model for contact.cs" />
     <Compile Include="Migrations\201705300358483_adding model for contact.Designer.cs">
       <DependentUpon>201705300358483_adding model for contact.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705301115287_edit to contact model.cs" />
+    <Compile Include="Migrations\201705301115287_edit to contact model.Designer.cs">
+      <DependentUpon>201705301115287_edit to contact model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705301131172_correction to contact model.cs" />
+    <Compile Include="Migrations\201705301131172_correction to contact model.Designer.cs">
+      <DependentUpon>201705301131172_correction to contact model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705301147059_edit to checkup model.cs" />
+    <Compile Include="Migrations\201705301147059_edit to checkup model.Designer.cs">
+      <DependentUpon>201705301147059_edit to checkup model.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -605,6 +618,12 @@
     <Content Include="Views\Prescriptions\Edit.cshtml" />
     <Content Include="Views\Prescriptions\Index.cshtml" />
     <Content Include="Views\Prescriptions\ReviewLabelInfo.cshtml" />
+    <Content Include="Views\Checkups\GenerateLabel.cshtml" />
+    <Content Include="Views\Contacts\Create.cshtml" />
+    <Content Include="Views\Contacts\Delete.cshtml" />
+    <Content Include="Views\Contacts\Details.cshtml" />
+    <Content Include="Views\Contacts\Edit.cshtml" />
+    <Content Include="Views\Contacts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -686,6 +705,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705300358483_adding model for contact.resx">
       <DependentUpon>201705300358483_adding model for contact.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705301115287_edit to contact model.resx">
+      <DependentUpon>201705301115287_edit to contact model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705301131172_correction to contact model.resx">
+      <DependentUpon>201705301131172_correction to contact model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705301147059_edit to checkup model.resx">
+      <DependentUpon>201705301147059_edit to checkup model.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
