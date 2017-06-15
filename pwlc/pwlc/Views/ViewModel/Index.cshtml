@@ -1,0 +1,41 @@
+﻿@Model IEnumerable<patientModel>
+@{
+    List<pwlc.Models.Patient> patientInfo = Model.ToList()[0] as List<pwlc.Models.Patient>;
+    List<pwlc.Models.Checkup> patientCheckups = Model.ToList()[1] as List<pwlc.Models.Checkup>;
+    List<pwlc.Models.Injection> patientInjections = Model.ToList()[0] as List<pwlc.Models.Injection>;
+    List<pwlc.Models.Invoice> patientInvoices = Model.ToList()[0] as List<pwlc.Models.Invoice>;
+    List<pwlc.Models.Event> patientEvents = Model.ToList()[0] as List<pwlc.Models.Event>;
+    List<pwlc.Models.Contact> patientContact = Model.ToList()[0] as List<pwlc.Models.Contact>;
+}
+
+<h2>Index</h2>
+
+
+    <div id="tabs">
+        <ul>
+            <li><a href="#tabs-1" onclick="getContentTab(1,{id:1586735});">Approver</a></li>
+            <li><a href="#tabs-2" onclick="getContentTab(2,{id:1586735});">Single Date</a></li>
+            <li><a href="#tabs-3" onclick="getContentTab(3,{id:1586735});">Date Range</a></li>
+
+
+        </ul>
+        <div id="tabs-1">
+
+
+        </div>
+        <div id="tabs-2">
+
+
+        </div>
+        <div id="tabs-3">
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+</asp:Content>

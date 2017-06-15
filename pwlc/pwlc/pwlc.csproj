@@ -232,6 +232,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PatientsController.cs" />
     <Compile Include="Controllers\PrescriptionsController.cs" />
+    <Compile Include="Controllers\ViewModelController.cs" />
     <Compile Include="Crypto\Encryptor.cs" />
     <Compile Include="Crypto\MyCrypto.cs" />
     <Compile Include="Global.asax.cs">
@@ -629,6 +630,8 @@
     <Content Include="Views\Contacts\Details.cshtml" />
     <Content Include="Views\Contacts\Edit.cshtml" />
     <Content Include="Views\Contacts\Index.cshtml" />
+    <Content Include="Views\ViewModel\CheckupsPartial.cshtml" />
+    <Content Include="Views\ViewModel\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

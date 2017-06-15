@@ -22,3 +22,54 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/* Start my custom css */
+#patient-profile {
+    border: #04488B 2px solid;
+    border-radius: 15px;
+    padding: 10px;
+    margin-top: 10px;
+    height: 120px;
+}
+
+#patient-id {
+    font-size: 25px;
+}
+
+#patient-information {
+    font-size: 20px;
+}
+
+#checkup-full-detail {
+    font-size: 18px;
+    border-radius: 10px;
+    border: #04488A 1px solid;
+    padding: 10px;
+}
+
+.one-fifth {
+    width: 20%;
+    float: left;
+    padding-left: 15px;
+}
+
+.row.patient-info-title {
+    background: #80c3ed;
+    padding: 10px 0px 10px 0px;
+    margin: -10px -10px -0px -10px;
+    font-weight: 700;
+    border-radius: 10px;
+}
+
+.row.patient-info {
+    padding: 20px 0px 10px 0px;
+    margin: -10px -10px -0px -10px;
+}
+
+.row.questions-title {
+    border-top: #80c3ed 1px solid;
+    border-top: #80c3ed 1px solid;
+    padding: 10px 0px 10px 0px;
+    margin: -10px -10px -0px -10px;
+    font-weight: 500;
+}

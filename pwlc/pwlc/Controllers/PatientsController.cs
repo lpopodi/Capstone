@@ -37,6 +37,7 @@ namespace pwlc.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Patient patient = db.Patients.Find(id);
+            patient.Address = Encryptor.Decrypt(patient.Address);
             if (patient == null)
             {
                 return HttpNotFound();

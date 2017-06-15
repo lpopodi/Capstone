@@ -9,62 +9,58 @@
 <div>
     <h4>Checkup</h4>
     <hr />
+
+    <div id="checkup-full-detail">
+        <div class="row patient-info-title">
+            <div class="col-md-2">@Html.DisplayNameFor(model => model.Patient.Chart)</div>
+            <div class="col-md-6">Patient</div>
+            <div class="col-md-2">@Html.DisplayNameFor(model => model.Age)</div>
+            <div class="col-md-2">@Html.DisplayNameFor(model => model.CheckupDate)</div>
+        </div>
+        <div class="row patient-info">
+            <div class="col-md-2">@Html.DisplayFor(model => model.Patient.Chart)</div>
+            <div class="col-md-6">@Html.DisplayFor(model => model.Patient.FirstName) @Html.DisplayFor(model => model.Patient.LastName)</div>
+            <div class="col-md-2">@Html.DisplayFor(model => model.Age)</div>
+            <div class="col-md-2">@Html.DisplayFor(model => model.CheckupDate)</div>
+        </div>
+
+        <div class="row">
+            <div class="one-fifth">@Html.DisplayNameFor(model => model.Excercising)</div>
+            <div class="one-fifth">@Html.DisplayNameFor(model => model.FollowingFoodGuidelines)</div>
+            <div class="one-fifth">@Html.DisplayNameFor(model => model.HCG)</div>
+            <div class="one-fifth">@Html.DisplayNameFor(model => model.ScriptToFill)</div>
+            <div class="one-fifth">@Html.DisplayNameFor(model => model.FillScript)</div>
+        </div>
+
+        <div class="row">
+            <div class="one-fifth">@Html.DisplayFor(model => model.Excercising)</div>
+            <div class="one-fifth">@Html.DisplayFor(model => model.FollowingFoodGuidelines)</div>
+            <div class="one-fifth">@Html.DisplayFor(model => model.HCG)</div>
+            <div class="one-fifth">@Html.DisplayFor(model => model.ScriptToFill)</div>
+            <div class="one-fifth">@Html.DisplayFor(model => model.FillScript)</div>
+        </div>
+
+        <div class="row">
+            <div class="one-fifth">@Html.DisplayNameFor(model => model.Height)</div>
+            <div class="one-fifth">@Html.DisplayNameFor(model => model.Weight)</div>
+            <div class="one-fifth">@Html.DisplayNameFor(model => model.BP)</div>
+            <div class="one-fifth">@Html.DisplayNameFor(model => model.BMI)</div>
+            <div class="one-fifth">@Html.DisplayNameFor(model => model.BodyFat)</div>
+        </div>
+        <div class="row">
+            <div class="one-fifth">@Html.DisplayFor(model => model.Height)</div>
+            <div class="one-fifth">@Html.DisplayFor(model => model.Weight)</div>
+            <div class="one-fifth">@Html.DisplayFor(model => model.BP)</div>
+            <div class="one-fifth">@Html.DisplayFor(model => model.BMI)</div>
+            <div class="one-fifth">@Html.DisplayFor(model => model.BodyFat)</div>
+        </div>
+
+        </div>
+
+
+
+
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.CheckupDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CheckupDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Age)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Age)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Height)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Height)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Weight)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Weight)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.BP)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BP)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.BMI)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BMI)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.BodyFat)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BodyFat)
-        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.LossGain)
@@ -107,30 +103,6 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Excercising)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Excercising)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FollowingFoodGuidelines)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FollowingFoodGuidelines)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HCG)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HCG)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.Hips)
         </dt>
 
@@ -163,22 +135,6 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ScriptToFill)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ScriptToFill)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FillScript)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FillScript)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.StaffNotes)
         </dt>
 
@@ -199,7 +155,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Signature)
+            <img src="@Html.DisplayFor(model =>model.Signature)" style="height:13px;width:76px;" />
         </dd>
 
     </dl>
